@@ -1,4 +1,8 @@
 
+/**
+ * Node represents a city with its ID and position read from a TSPLIB file.
+ */
+
 public class Node {
 
     //The identifier of this node.

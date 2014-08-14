@@ -3,6 +3,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * TSPProblem represents a TSPLIB problem instance.
+ */
+
 public class TSPProblem {
 
     private String problem_name;

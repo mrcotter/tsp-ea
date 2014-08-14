@@ -11,12 +11,12 @@ public class TSPProblem {
 
     private String problem_type;
 
-    private Individual tour;
+    private Map map;
 
     //Constructs an empty TSPLIB problem
     public TSPProblem() {
         super();
-        tour = new Individual();
+        map = new Map();
     }
 
     //Constructs a TSPLIB problem instance from a file

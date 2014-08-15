@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * TSPProblem represents a TSPLIB problem instance.
@@ -14,6 +15,8 @@ public class TSPProblem {
     private String problem_comment;
 
     private String problem_type;
+
+    private Node node;
 
     private Map map;
 
@@ -61,13 +64,20 @@ public class TSPProblem {
                         problem_type = "Problem Type: " + token_1;
                     }
                 } else {
+                    String[] tokens = line.trim().split("\\s+");
 
+                    if (tokens.length != 3) {
+                        System.err.println("Incorrect information for node entry: " + line);
+                        continue;
+                    }
+
+                    int id = Integer.parseInt(tokens[0].trim());
+                    int position[] = new int[] {Integer.parseInt(tokens[1].trim()), Integer.parseInt(tokens[2].trim())};
+                    node = new Node(id, position);
+                    map.addNodes(node);
                 }
 
             }
-
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

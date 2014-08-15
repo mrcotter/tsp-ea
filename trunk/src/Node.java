@@ -5,13 +5,13 @@
 
 public class Node {
 
-    //The identifier of this node.
+    //The id of the node.
     private final int id;
 
-    //The position of this node.
+    //The position of the node.
     private final int[] position;
 
-    //Nodes constructor
+    //Node constructor
     public Node(int id, int[] position) {
         super();
         this.id = id;

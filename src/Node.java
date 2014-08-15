@@ -18,11 +18,12 @@ public class Node {
         this.position = position;
     }
 
-    //Return the id of the no
+    //Return the id of the node
     public int getID() {
         return id;
     }
 
+    //Return the postion of the node
     public int[] getPosition() {
         return position;
     }

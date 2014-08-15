@@ -11,12 +11,8 @@ import java.util.Arrays;
 public class TSPProblem {
 
     private String problem_name;
-
     private String problem_comment;
-
     private String problem_type;
-
-    private Node node;
 
     private Map map;
 
@@ -35,7 +31,7 @@ public class TSPProblem {
     //Load a problem from a TSPLIB file
     private void load(File file) throws IOException {
         BufferedReader tsp_reader = null;
-        String line = null;
+        String line;
 
         try {
             tsp_reader = new BufferedReader(new FileReader(file));
@@ -43,38 +39,42 @@ public class TSPProblem {
             while ((line = tsp_reader.readLine()) != null) {
                 line = line.trim();
 
-                if (line.isEmpty() || line.equals("NODE_COORD_SECTION")) {
-                    //Do nothing
-                } else if (line.equals("EOF")) {
-                    break;
-                }  else if (line.contains(":")) {
-                    String[] tokens = line.split(":");
-                    String token_0 = tokens[0].trim();
-                    String token_1 = tokens[1].trim();
-
-                    if (token_0.equals("NAME")) {
-                        problem_name = "Problem Name: " + token_1;
+                if (!line.isEmpty() && !line.equals("NODE_COORD_SECTION")) {
+                    if (line.equals("EOF")) {
+                        break;
                     }
 
-                    if (token_0.equals("COMMENT")) {
-                        problem_comment = "Comment: " + token_1;
+                    else if (line.contains(":")) {
+                        String[] tokens = line.split(":");
+                        String token_0 = tokens[0].trim();
+                        String token_1 = tokens[1].trim();
+
+                        if (token_0.equals("NAME")) {
+                            problem_name = "Problem Name: " + token_1;
+                        }
+
+                        if (token_0.equals("COMMENT")) {
+                            problem_comment = "Comment: " + token_1;
+                        }
+
+                        if (token_0.equals("TYPE")) {
+                            problem_type = "Problem Type: " + token_1;
+                        }
                     }
 
-                    if (token_0.equals("TYPE")) {
-                        problem_type = "Problem Type: " + token_1;
-                    }
-                } else {
-                    String[] tokens = line.trim().split("\\s+");
+                    else {
+                        String[] tokens = line.trim().split("\\s+");
 
-                    if (tokens.length != 3) {
-                        System.err.println("Incorrect information for node entry: " + line);
-                        continue;
-                    }
+                        if (tokens.length != 3) {
+                            System.err.println("Incorrect information for node entry: " + line);
+                            continue;
+                        }
 
-                    int id = Integer.parseInt(tokens[0].trim());
-                    int position[] = new int[] {Integer.parseInt(tokens[1].trim()), Integer.parseInt(tokens[2].trim())};
-                    node = new Node(id, position);
-                    map.addNodes(node);
+                        int id = Integer.parseInt(tokens[0].trim());
+                        int position[] = new int[] {Integer.parseInt(tokens[1].trim()), Integer.parseInt(tokens[2].trim())};
+                        Node node = new Node(id, position);
+                        map.addNodes(node);
+                    }
                 }
             }
         } finally {
@@ -82,6 +82,14 @@ public class TSPProblem {
                 tsp_reader.close();
             }
         }
-
     }
+
+    //Print the information of a problem
+    public void printProblem() {
+        System.out.println(problem_name);
+        System.out.println(problem_comment);
+        System.out.println(problem_type);
+        //map.printNodes();
+    }
+
 }

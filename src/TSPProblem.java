@@ -27,13 +27,13 @@ public class TSPProblem {
     }
 
     //Constructs a TSPLIB problem instance from a file
-    public TSPProblem(File file) {
+    public TSPProblem(File file) throws IOException {
         this();
         load(file);
     }
 
     //Load a problem from a TSPLIB file
-    private void load(File file) {
+    private void load(File file) throws IOException {
         BufferedReader tsp_reader = null;
         String line = null;
 
@@ -76,10 +76,11 @@ public class TSPProblem {
                     node = new Node(id, position);
                     map.addNodes(node);
                 }
-
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } finally {
+            if (tsp_reader != null) {
+                tsp_reader.close();
+            }
         }
 
     }

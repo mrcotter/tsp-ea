@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * TSPProblem represents a TSPLIB problem instance.
@@ -16,13 +15,13 @@ public class TSPProblem {
 
     private Map map;
 
-    //Constructs an empty TSPLIB problem
+    //Construct an empty TSPLIB problem
     public TSPProblem() {
         super();
         map = new Map();
     }
 
-    //Constructs a TSPLIB problem instance from a file
+    //Construct a TSPLIB problem instance from a file
     public TSPProblem(File file) throws IOException {
         this();
         load(file);
@@ -84,7 +83,7 @@ public class TSPProblem {
         }
     }
 
-    //Print the information of a problem
+    //Print the information of a given problem
     public void printProblem() {
         System.out.println(problem_name);
         System.out.println(problem_comment);

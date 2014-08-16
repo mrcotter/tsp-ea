@@ -4,30 +4,29 @@ import java.util.Arrays;
 
 /**
  * Map represents an area with given cities read from a TSPLIB file.
- * It also provide a function that calculate the euclidean distances between cities.
  */
 
 public class Map {
 
     //The nodes in the map
-    private final ArrayList<Node> cities;
+    private final ArrayList<Node> nodes;
 
     //Constructor of a map
     public Map() {
         super();
-        cities = new ArrayList<Node>();
+        nodes = new ArrayList<Node>();
     }
 
     //Add the contents of this map from the TSPLIB reader
     public void addNodes(Node node) throws IOException {
-        cities.add(node);
+        nodes.add(node);
     }
 
     public void printNodes() {
-        if (cities.size() != 0) {
+        if (nodes.size() != 0) {
             System.out.println("ID  Postion");
 
-            for (Node city: cities) {
+            for (Node city: nodes) {
                 System.out.println(city.getID() + "   " + Arrays.toString(city.getPosition()));
             }
         } else {

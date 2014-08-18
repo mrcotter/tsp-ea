@@ -1,4 +1,3 @@
-
 /**
  * Node represents a city with its ID and position read from a TSPLIB file.
  */
@@ -23,7 +22,7 @@ public class Node {
         return id;
     }
 
-    //Return the postion of the node
+    //Return the position of the node
     public int[] getPosition() {
         return position;
     }

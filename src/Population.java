@@ -1,8 +1,4 @@
 
-/**
- * Population represents a set of solutions to the TSP.
- */
-
 public class Population {
 	
 	//Create a population for individuals
@@ -63,3 +59,10 @@ public class Population {
 	
 
 }
+
+
+
+
+
+
+

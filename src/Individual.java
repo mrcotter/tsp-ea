@@ -1,7 +1,3 @@
-
-/**
- * Individual represents a possible solution to the TSP as a permutation of the given cities.
- */
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -45,6 +41,18 @@ public class Individual {
 		return single_tour.get(pos);
 	}
 	
+	//Set a node for a single tour
+	public void SetANode(int pos, Node node)
+	{
+		single_tour.set(pos, node);
+	}
+	
+	//Delete a node from a single tour
+	public void DeleteANode(int pos)
+	{
+		single_tour.remove(pos);
+	}
+	
 	//Get the number of the nodes in a tour
 	public int NumberOfNodes()
 	{
@@ -79,3 +87,11 @@ public class Individual {
 	}
 
 }
+
+
+
+
+
+
+
+

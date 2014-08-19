@@ -9,9 +9,19 @@ public class Individual {
 	
 	private Map map;
 	
+	//Initialize a tour
 	public Individual(Map map)
 	{
 		this.map = map;
+	}
+	
+	//Create a empty tour
+	public Individual()
+	{
+		for(int i = 0; i < map.NumberOfNodes(); i++)
+		{
+			single_tour.add(null);
+		}
 	}
 	
 	//Create a random tour

@@ -63,6 +63,12 @@ public class Individual {
 		single_tour.remove(pos);
 	}
 	
+	//If Contain a node?
+	public boolean IfContainANode(Node node)
+	{
+		return single_tour.contains(node);
+	}
+	
 	//Get the number of the nodes in a tour
 	public int NumberOfNodes()
 	{

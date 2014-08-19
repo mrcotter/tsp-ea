@@ -73,6 +73,7 @@ public class Crossover {
 	public Individual Crossover_PMX()
 	{
 		Individual Child = new Individual();
+		Individual SubSet = new Individual();
 		
 		int[] Random_Int = new int[Parent_1.NumberOfNodes()];
 		
@@ -92,7 +93,7 @@ public class Crossover {
 		{
 			for(int i = RandomPos_2; i <= RandomPos_1; i++)
 			{
-				Child.SetANode(i, Parent_1.GetANode(i));
+				SubSet.SetANode(i, Parent_1.GetANode(i));
 			}
 		}
 		
@@ -100,11 +101,29 @@ public class Crossover {
 		{
 			for(int i = RandomPos_1; i <= RandomPos_2; i++)
 			{
-				Child.SetANode(i, Parent_1.GetANode(i));
+				SubSet.SetANode(i, Parent_1.GetANode(i));
 			}
 		}
 		
+		for(int i = 0; i < Parent_2.NumberOfNodes(); i++)
+		{
+			for(int j = 0; j<Child.NumberOfNodes(); j++)
+			{
+				if(Parent_2.GetANode(i) == SubSet.GetANode(j))
+				{
+					Child.SetANode(j, Parent_2.GetANode(i));
+					Child.SetANode(i, Parent_2.GetANode(j));
+				}
+			}
+		}
 		
+		for(int i = 0; i < Child.NumberOfNodes(); i++)
+		{
+			if(Child.GetANode(i) == null)
+			{
+				Child.SetANode(i, Parent_2.GetANode(i));
+			}
+		}
 		
 		return Child;
 	}

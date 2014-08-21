@@ -25,15 +25,13 @@ public class Map {
     //Get a single node within the map
     public Node GetNode(int NodeID)
     {
-    	Node single_N = nodes.get(NodeID);
-    	
-    	return single_N;
+        return nodes.get(NodeID);
     }
     
     //Get the number of the nodes in the map
     public int NumberOfNodes()
     {
-    	return nodes.size();
+        return nodes.size();
     }
     
     //print all of the nodes

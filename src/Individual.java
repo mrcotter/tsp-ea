@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-
+/**
+ * Individual represents a possible solution to the TSP as a permutation of the given nodes.
+ */
 
 public class Individual {
 	
 	private ArrayList<Node> single_tour = new ArrayList<Node>();
-	
 	private Map map;
 	
 	//Initialize a tour
@@ -27,9 +28,10 @@ public class Individual {
 	//Create a random tour
 	public void CreateRandomTour()
 	{
-		for(int i=0; i<map.NumberOfNodes(); i++)
+        //System.out.println(map.GetNode(0).getID());
+		for (int i=0; i < map.NumberOfNodes(); i++)
 		{
-			single_tour.set(i, map.GetNode(i));
+			single_tour.add(i, map.GetNode(i));
 		}
 		
 		long seed = System.nanoTime();
@@ -50,6 +52,12 @@ public class Individual {
 	{
 		return single_tour.get(pos);
 	}
+
+    //Get the tour
+    public ArrayList<Node> getTour()
+    {
+        return single_tour;
+    }
 	
 	//Set a node for a single tour
 	public void SetANode(int pos, Node node)
@@ -97,8 +105,7 @@ public class Individual {
 			
 			TotalDistance = TotalDistance + Node_Start.distanceTo(Node_End);
 		}
-		
-		
+
 		return TotalDistance;
 	}
 

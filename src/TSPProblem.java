@@ -83,6 +83,11 @@ public class TSPProblem {
         }
     }
 
+    //Return map
+    public Map getMap() {
+        return map;
+    }
+
     //Print the information of a given problem
     public void printProblem() {
         System.out.println(problem_name);

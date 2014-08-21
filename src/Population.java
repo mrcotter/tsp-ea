@@ -1,4 +1,8 @@
 
+/**
+ * Population represents a set of solutions.
+ */
+
 public class Population {
 	
 	//Create a population for individuals
@@ -13,7 +17,7 @@ public class Population {
 		{
 			Individual single_tour = new Individual(map);
 			single_tour.CreateRandomTour();
-			AddASingleTour(i,single_tour);
+			AddASingleTour(i, single_tour);
 		}
 	}
 	
@@ -23,13 +27,13 @@ public class Population {
 		multiple_tours = new Individual[Population_Size];
 	}
 	
-	//Add a individual to the population
+	//Add an individual to the population
 	public void AddASingleTour(int index, Individual single_tour)
 	{
 		multiple_tours[index] = single_tour;
 	}
 	
-	//Get a individual from the population
+	//Get an individual from the population
 	public Individual GetASingleTour(int index)
 	{
 		return multiple_tours[index];
@@ -56,13 +60,16 @@ public class Population {
 	{
 		return multiple_tours.length;
 	}
-	
+
+    @Override
+    public String toString() {
+        String result = null;
+        for (Individual multiple_tour : multiple_tours) {
+            result += multiple_tour.toString() + "\n";
+        }
+        return result;
+    }
 
 }
-
-
-
-
-
 
 

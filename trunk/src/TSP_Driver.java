@@ -15,7 +15,8 @@ public class TSP_Driver {
 
         Individual tour = new Individual(map);
         tour.CreateRandomTour();
-        System.out.println(tour.getTour());
+        System.out.println(tour.toString());
+        System.out.println(tour.TotalDistance());
 
     }
 }

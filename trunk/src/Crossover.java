@@ -13,6 +13,9 @@ public class Crossover {
 	//Order crossover
 	public void Crossover_Order(Individual parent_1, Individual parent_2) {
 
+        List<Node> tour_1 = parent_1.getNodeList();
+        List<Node> tour_2 = parent_2.getNodeList();
+
         int size = parent_1.NumberOfNodes();
 
         Random rand = new Random();
@@ -28,9 +31,6 @@ public class Crossover {
         List<Node> child_1 = new Vector<Node>();
         List<Node> child_2 = new Vector<Node>();
 
-        List<Node> tour_1 = parent_1.getNodeList();
-        List<Node> tour_2 = parent_2.getNodeList();
-
         //Copy the part in between the start and end to the children
         child_1.addAll(tour_1.subList(start, end));
         child_2.addAll(tour_2.subList(start, end));
@@ -38,22 +38,28 @@ public class Crossover {
         //Do order procedure
         int current_index = 0;
         Node current_node_in_tour1, current_node_in_tour2;
+
         for (int i = 0; i < size; i++) {
             current_index = (end + i) % size;
             current_node_in_tour1 = tour_1.get(current_index);
             current_node_in_tour2 = tour_2.get(current_index);
 
-            //If child 1 does not contain the current city in tour 2, add it
-            if (!child_1.contains(current_node_in_tour1)) {
+            //If child 1 does not contain the current node in tour 2, then add it
+            if (!child_1.contains(current_node_in_tour2)) {
                 child_1.add(current_node_in_tour2);
             }
 
-            //If child 2 does not contain the current city in tour 1, add it
+            //If child 2 does not contain the current node in tour 1, then add it
             if (!child_2.contains(current_node_in_tour1)) {
                 child_2.add(current_node_in_tour1);
             }
-
         }
+
+        //Rotate the list so that the elements are in the right place
+        Collections.rotate(child_1, start);
+        Collections.rotate(child_2, start);
+
+        //System.out.println(child_1.toString() + "\n" + child_2.toString());
 
     }
 	

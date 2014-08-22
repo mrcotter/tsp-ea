@@ -44,10 +44,12 @@ public class Mutation {
 		
 		if(RandomPos_1 > RandomPos_2)
 		{
-			System.out.println("haha_2");
+			//System.out.println("haha_2");
 			individual.AddANode(RandomPos_1+1, temp.get(RandomPos_2));
 			individual.DeleteANode(RandomPos_2);
 		}
+
+        System.out.println(individual.toString());
 			
 	}
 	

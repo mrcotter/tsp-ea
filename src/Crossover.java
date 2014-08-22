@@ -10,8 +10,8 @@ public class Crossover {
         tours = pop.GetAllTours();
     }
 
-	//Order crossover
-	public void Crossover_Order(Individual parent_1, Individual parent_2) {
+    //Order crossover
+    public void Crossover_Order(Individual parent_1, Individual parent_2) {
 
         List<Node> tour_1 = parent_1.getNodeList();
         List<Node> tour_2 = parent_2.getNodeList();
@@ -77,9 +77,12 @@ public class Crossover {
         }
         */
     }
-	
-	//PMX crossover
-	public void Crossover_PMX(Individual parent_1, Individual parent_2) {
+
+    //PMX crossover
+    public void Crossover_PMX(Individual parent_1, Individual parent_2) {
+
+        List<Node> tour_1 = parent_1.getNodeList();
+        List<Node> tour_2 = parent_2.getNodeList();
 
         int size = parent_1.NumberOfNodes();
 
@@ -90,71 +93,103 @@ public class Crossover {
 
         int start = Math.min(number1, number2);
         int end = Math.max(number1, number2);
-        System.out.println("start: " + start + ", end: " + end);
+        //System.out.println("start: " + start + ", end: " + end);
 
         //Initialise children
-        List<Node> child_1 = parent_1.getNodeList();
-        List<Node> child_2 = parent_2.getNodeList();
+        List<Node> child_1 = Arrays.asList(new Node[size]);
+        List<Node> child_2 = Arrays.asList(new Node[size]);
 
-        //Get the parts in each tour
-        List<Node> section_1 = child_1.subList(start, end);
-        List<Node> section_2 = child_2.subList(start, end);
+        //Copy the section from the parents to the children
+        for (int i = start; i <= end; i++) {
+            child_1.set(i, tour_1.get(i));
+            child_2.set(i, tour_2.get(i));
+        }
 
-        Node current_node, replace_node;
-        int replace_index;
-        int count = 0;
+        //Starting from start point, look for elements on that section of the Parent2 that have not been copied.
+        //For each of these (say i) look in the Child1 to see what element (say j) has been copied in its place from Parent1.
+        //Place i in the position occupied by j in Parent2.
+        Node replaceNode_1, replaceNode_2;
 
-        //Iterate each city which is not in the section
-        for (int i = end % size; i >= end || i < start; i = (i + 1) % size) {
-            count++;
-            //--------------- Child 1 ----------------
-            current_node = child_1.get(i);
+        for (int i = start; i <= end; i++) {
+            replaceNode_1 = tour_1.get(i);
+            replaceNode_2 = tour_2.get(i);
 
-            //If that city is in the random part
-            if (section_1.contains(current_node)) {
-                //Get the index of the node to replace the repeated node within the section
-                replace_index = section_1.indexOf(current_node);
+            //If the node has already been copied to the child, take no action.
+            //Otherwise get the gene that is on the same index on the other parent.
+            //Find the position that that gene occupies on this parent.
 
-                //Get the node that is intended to replace the repeated node
-                replace_node = section_2.get(replace_index);
+            if (!child_1.contains(replaceNode_2)) {
+                int indexP2j = tour_2.indexOf(replaceNode_1);
 
-                //If the repeated node is also contained in the section
-                while (section_1.contains(replace_node)) {
-                    //Repeat the process again
-                    replace_index = section_1.indexOf(replace_node);
-                    replace_node = section_2.get(replace_index);
+                Node nodeP2j= child_1.get(indexP2j);
+
+                if (nodeP2j == null){
+                    child_1.set(indexP2j, replaceNode_2);
+                } else {
+                    //If the place occupied by j in Parent2 has already been filled
+                    //in child1, by an element k, put i in the position occupied by k in Parent2.
+                    int indexP2k = tour_2.indexOf(nodeP2j);
+
+                    //Verify that the child has no node on this position.
+                    if (child_1.get(indexP2k) == null){
+                        child_1.set(indexP2k, replaceNode_2);
+                    }
                 }
-
-                //Replace the current node with the replacement node
-                child_1.set(i, replace_node);
             }
 
-            //--------------- Child 2 ----------------
-            current_node = child_2.get(i);
+            if (!child_2.contains(replaceNode_1)) {
+                int indexP1j = tour_1.indexOf(replaceNode_2);
 
-            //If that city is in the random part
-            if (section_2.contains(current_node)) {
-                //Get the index of the node to replace the repeated node within the section
-                replace_index = section_2.indexOf(current_node);
+                Node nodeP1j= child_2.get(indexP1j);
 
-                //Get the node that is intended to replace the repeated node
-                replace_node = section_1.get(replace_index);
+                if (nodeP1j == null){
+                    child_2.set(indexP1j, replaceNode_1);
+                } else {
+                    int indexP1k = tour_1.indexOf(nodeP1j);
 
-                //If the repeated node is also contained in the section
-                while (section_2.contains(replace_node)) {
-                    //Repeat the process again
-                    replace_index = section_2.indexOf(replace_node);
-                    replace_node = section_1.get(replace_index);
+                    if (child_2.get(indexP1k) == null){
+                        child_2.set(indexP1k, replaceNode_1);
+                    }
                 }
-
-                //Replace the current node with the replacement node
-                child_2.set(i, replace_node);
             }
         }
 
+        //The remaining elements are placed by verifying which nodes are in Parent2 that don't exist in Child1 and copy them.
+        ArrayList<Node> copy_tour_1 = new ArrayList<Node>(tour_1);
+        ArrayList<Node> copy_tour_2 = new ArrayList<Node>(tour_2);
 
+        ArrayList<Integer> emptyList_1 = new ArrayList<Integer>();
+        ArrayList<Integer> emptyList_2 = new ArrayList<Integer>();
+
+        //For each element in Child1, if it is null, put its index in emptyList1, otherwise remove the element from Parent2.
+        for (int i = 0; i < size; i++) {
+            Node temp_node1 = child_1.get(i);
+            Node temp_node2 = child_2.get(i);
+
+            if (temp_node1 == null) {
+                emptyList_1.add(i);
+            } else {
+                copy_tour_2.remove(temp_node1);
+            }
+
+            if (temp_node2 == null) {
+                emptyList_2.add(i);
+            } else {
+                copy_tour_1.remove(temp_node2);
+            }
+        }
+
+        //Put rest nodes from Parent2 in the empty places
+        for (int i: emptyList_1) {
+            child_1.set(i, copy_tour_2.remove(0));
+        }
+
+        for (int i: emptyList_2) {
+            child_2.set(i, copy_tour_1.remove(0));
+        }
+
+        /*
         //Output test for parents
-        System.out.println("count: " + count);
         System.out.println(parent_1.toString());
         System.out.println(parent_2.toString());
         System.out.println();
@@ -167,64 +202,11 @@ public class Crossover {
         for (int i = 0; i < size; i++) {
             System.out.print(child_2.get(i).getID() + " ");
         }
-
+        */
 
     }
 
-	// Cycle Crossover
-        public void Cycle_Crossover(Individual parent_1, Individual parent_2) {
-        int size = parent_1.NumberOfNodes();
-    
-        List<Node> tour_1 = parent_1.getNodeList();
-        List<Node> tour_2 = parent_2.getNodeList();
-        // Initialise children
-        List<Node> child_1 = new Vector<Node>(parent_2.getNodeList());
-        List<Node> child_2 = new Vector<Node>(parent_1.getNodeList());
-        // the current visited indices
-        Set<Integer> Visited_Indices = new HashSet<Integer>(size);
-        // the indices in current cycle
-        List<Integer> Indices = new ArrayList<Integer> (size);
-        // initial the starting index to 0 and the cycle to 1
-        int index = 0;
-        int cycle = 1;
-        
-        while (Visited_Indices.size() < size) {
-            Indices.add(index);
-            
-            Node node = tour_2.get(index);
-            index = tour_1.indexOf(node);
-            
-            while (index != Indices.get(0)) {
-        // add the index to the cycle indices
-                Indices.add(index);
-        // get the node in the tour_2 follow the index
-                node = tour_2.get(index);
-        // get the index of the node in the tour_1
-                index = tour_1.indexOf(node);
-            }
-        // swap the child nodes on the indices found in the even cycle
-            if ((cycle++ % 2) != 0) {
-                for (int i : Indices) {
-                    Node temp = child_1.get(i);
-                    child_1.set(i, child_2.get(i));
-                    child_2.set(i, temp);
-                }
-            }
-            
-            Visited_Indices.addAll(Indices);
-        // determine the next starting index
-            index = (Indices.get(0) + 1) % size;
-            while (Visited_Indices.contains(index) && Visited_Indices.size() < size) {
-                index ++;
-                if (index >= size) {
-                    index = 0;
-                }
-            }
-            Indices.clear();
-        }
-        
-    }
-    
+
 
 }
 

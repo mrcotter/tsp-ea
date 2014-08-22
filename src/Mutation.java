@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
@@ -15,101 +15,112 @@ public class Mutation {
 	//Mutation by using insert method
 	public void Mutation_Insert()
 	{
-		int[] Random_Int = new int[individual.NumberOfNodes()];
+		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
 		
-		for (int j = 0; j < Random_Int.length; j++)
+		for (int j = 0; j < individual.NumberOfNodes(); j++)
 		{
-			Random_Int[j] = j;
+			Random_Int.add(j);
 		}
 		
-		Collections.shuffle(Arrays.asList(Random_Int));
+		Collections.shuffle(Random_Int);
 		
-		int RandomPos_1 = Random_Int[0];
+		int RandomPos_1 = Random_Int.get(0);
 		long seed = System.nanoTime();
 		Random rand = new Random(seed);
-		int RandomPos_2 = Random_Int[rand.nextInt(individual.NumberOfNodes()-1) + 1];
+		int RandomPos_2 = Random_Int.get(rand.nextInt(individual.NumberOfNodes()-1) + 1);
+		
+		ArrayList<Node> temp = new ArrayList<Node>();
+		
+		for(int i = 0; i<individual.NumberOfNodes(); i++)
+		{
+			temp.add(individual.GetANode(i));
+		}
+		
+		if(RandomPos_1 < RandomPos_2)
+		{
+			individual.AddANode(RandomPos_1+1, temp.get(RandomPos_2));
+			individual.DeleteANode(RandomPos_2+1);
+		}
+		
+		if(RandomPos_1 > RandomPos_2)
+		{
+			System.out.println("haha_2");
+			individual.AddANode(RandomPos_1+1, temp.get(RandomPos_2));
+			individual.DeleteANode(RandomPos_2);
+		}
 			
-		Node temp = individual.GetANode(RandomPos_2);
-		individual.DeleteANode(RandomPos_2);
-		individual.SetANode(RandomPos_1+1, temp);
-
-        System.out.println(individual.toString());
-
-    }
+	}
 	
 	
 	//Mutation by using swap method
 	public void Mutation_Swap()
 	{
-		int[] Random_Int = new int[individual.NumberOfNodes()];
+		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
 		
-		for (int j = 0; j < Random_Int.length; j++)
+		for (int j = 0; j < individual.NumberOfNodes(); j++)
 		{
-			Random_Int[j] = j;
+			Random_Int.add(j);
 		}
 		
-		Collections.shuffle(Arrays.asList(Random_Int));
-		
-		int RandomPos_1 = Random_Int[0];
+		Collections.shuffle(Random_Int);
+				
+		int RandomPos_1 = Random_Int.get(0);
 		long seed = System.nanoTime();
 		Random rand = new Random(seed);
-		int RandomPos_2 = Random_Int[rand.nextInt(individual.NumberOfNodes()-1) + 1];
+		int RandomPos_2 = Random_Int.get(rand.nextInt(individual.NumberOfNodes()-1) + 1);
 		
 		Node node_1 = individual.GetANode(RandomPos_1);
 		Node node_2 = individual.GetANode(RandomPos_2);
 		
 		individual.SetANode(RandomPos_1, node_2);
-		individual.SetANode(RandomPos_2, node_1);
-
-        System.out.println(individual.toString());
-
-    }
+		individual.SetANode(RandomPos_2, node_1);	
+	}
 	
 	//Mutation by using inversion
 	public void Mutation_Inversion()
 	{
-		int[] Random_Int = new int[individual.NumberOfNodes()];
+		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
 		
-		for (int j = 0; j < Random_Int.length; j++)
+		for (int j = 0; j < individual.NumberOfNodes(); j++)
 		{
-			Random_Int[j] = j;
+			Random_Int.add(j);
 		}
 		
-		Collections.shuffle(Arrays.asList(Random_Int));
-		
-		int RandomPos_1 = Random_Int[0];
+		Collections.shuffle(Random_Int);
+				
+		int RandomPos_1 = Random_Int.get(0);
 		long seed = System.nanoTime();
 		Random rand = new Random(seed);
-		int RandomPos_2 = Random_Int[rand.nextInt(individual.NumberOfNodes()-1) + 1];
+		int RandomPos_2 = Random_Int.get(rand.nextInt(individual.NumberOfNodes()-1) + 1);
 		
 		if(RandomPos_1 > RandomPos_2)
 		{
-			Node[] temp = new Node[RandomPos_1 - RandomPos_2 + 1];
+			ArrayList<Node> temp = new ArrayList<Node>();
 			int temp_num = RandomPos_1; 
 			for(int j = RandomPos_2; j <= RandomPos_1; j++)
 			{
-				temp[j] = individual.GetANode(j);
+				temp.add(individual.GetANode(j));
 			}
 			
-			for(int j = 0; j < temp.length; j++)
+			for(int j = 0; j < temp.size(); j++)
 			{
-				individual.SetANode(temp_num, temp[j]);
+				individual.SetANode(temp_num, temp.get(j));
 				temp_num--;
 			}
 		}
 		
 		if(RandomPos_1 < RandomPos_2)
 		{
-			Node[] temp = new Node[RandomPos_2 - RandomPos_1 + 1];
+			ArrayList<Node> temp = new ArrayList<Node>();
 			int temp_num = RandomPos_2; 
 			for(int j = RandomPos_1; j <= RandomPos_2; j++)
 			{
-				temp[j] = individual.GetANode(j);
+				temp.add(individual.GetANode(j));
 			}
 			
-			for(int j = 0; j < temp.length; j++)
+			for(int j = 0; j < temp.size(); j++)
 			{
-				individual.SetANode(temp_num, temp[j]);
+				individual.SetANode(temp_num, temp.get(j));
 				temp_num--;
 			}
 		}
@@ -118,49 +129,53 @@ public class Mutation {
 	//Mutation by using Scramble
 	public void Mutation_Scramble()
 	{
-		int[] Random_Int = new int[individual.NumberOfNodes()];
+		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
 		
-		for (int j = 0; j < Random_Int.length; j++)
+		for (int j = 0; j < individual.NumberOfNodes(); j++)
 		{
-			Random_Int[j] = j;
+			Random_Int.add(j);
 		}
 		
-		Collections.shuffle(Arrays.asList(Random_Int));
-		
-		int RandomPos_1 = Random_Int[0];
+		Collections.shuffle(Random_Int);
+				
+		int RandomPos_1 = Random_Int.get(0);
 		long seed = System.nanoTime();
 		Random rand = new Random(seed);
-		int RandomPos_2 = Random_Int[rand.nextInt(individual.NumberOfNodes()-1) + 1];
+		int RandomPos_2 = Random_Int.get(rand.nextInt(individual.NumberOfNodes()-1) + 1);
 		
 		if(RandomPos_1 > RandomPos_2)
 		{
-			Node[] temp = new Node[RandomPos_1 - RandomPos_2 + 1];
+			ArrayList<Node> temp = new ArrayList<Node>();
+			int temp_num = RandomPos_2; 
 			for(int j = RandomPos_2; j <= RandomPos_1; j++)
 			{
-				temp[j] = individual.GetANode(j);
+				temp.add(individual.GetANode(j));
 			}
 			
-			Collections.shuffle(Arrays.asList(temp));
+			Collections.shuffle(temp);
 			
-			for(int j = RandomPos_2; j <= temp.length; j++)
+			for(int j = 0; j < temp.size(); j++)
 			{
-				individual.SetANode(j, temp[j]);
+				individual.SetANode(temp_num, temp.get(j));
+				temp_num++;
 			}
 		}
 		
 		if(RandomPos_1 < RandomPos_2)
 		{
-			Node[] temp = new Node[RandomPos_2 - RandomPos_1 + 1];
+			ArrayList<Node> temp = new ArrayList<Node>();
+			int temp_num = RandomPos_1;
 			for(int j = RandomPos_1; j <= RandomPos_2; j++)
 			{
-				temp[j] = individual.GetANode(j);
+				temp.add(individual.GetANode(j));
 			}
 			
-			Collections.shuffle(Arrays.asList(temp));
+			Collections.shuffle(temp);
 			
-			for(int j = RandomPos_1; j <= temp.length; j++)
+			for(int j = 0; j < temp.size(); j++)
 			{
-				individual.SetANode(j, temp[j]);
+				individual.SetANode(temp_num, temp.get(j));
+				temp_num++;
 			}
 		}
 	}

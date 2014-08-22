@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Population represents a set of solutions.
@@ -38,6 +40,11 @@ public class Population {
 	{
 		return multiple_tours[index];
 	}
+
+    //Get all tours from population
+    public ArrayList<Individual> GetAllTours() {
+        return new ArrayList<Individual>(Arrays.asList(multiple_tours));
+    }
 	
 	//Find out the shortest tour from the population
 	public Individual FindShortest()

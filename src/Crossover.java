@@ -27,6 +27,8 @@ public class Crossover {
         int start = Math.min(number1, number2);
         int end = Math.max(number1, number2);
 
+        System.out.println("start: " + start + ", end: " + end);
+
         //Initialise children
         List<Node> child_1 = new Vector<Node>();
         List<Node> child_2 = new Vector<Node>();
@@ -36,7 +38,7 @@ public class Crossover {
         child_2.addAll(tour_2.subList(start, end));
 
         //Do order procedure
-        int current_index = 0;
+        int current_index;
         Node current_node_in_tour1, current_node_in_tour2;
 
         for (int i = 0; i < size; i++) {
@@ -59,7 +61,19 @@ public class Crossover {
         Collections.rotate(child_1, start);
         Collections.rotate(child_2, start);
 
-        //System.out.println(child_1.toString() + "\n" + child_2.toString());
+
+        //Output test for parents
+        System.out.println(parent_1.toString());
+        System.out.println(parent_2.toString());
+        System.out.println();
+        //Output test for children
+        for (int i = 0; i < size; i++) {
+            System.out.print(child_1.get(i).getID() + " ");
+        }
+        System.out.println();
+        for (int i = 0; i < size; i++) {
+            System.out.print(child_2.get(i).getID() + " ");
+        }
 
     }
 	

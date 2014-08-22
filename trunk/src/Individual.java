@@ -48,6 +48,12 @@ public class Individual {
 	{
 		single_tour.set(pos, node);
 	}
+
+	//Insert a node
+	public void AddANode(int pos, Node node)
+	{
+		single_tour.add(pos, node);
+	}
 	
 	//Delete a node from a single tour
 	public void DeleteANode(int pos)

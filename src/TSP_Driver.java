@@ -3,7 +3,7 @@ import java.io.File;
 public class TSP_Driver {
     public static void main(String[] args) throws Exception {
 
-        TSPProblem problem = new TSPProblem(new File("./data/eil51.tsp"));
+        TSPProblem problem = new TSPProblem(new File("./data/eil10.tsp"));
         //problem.printProblem();
 
         Map map = problem.getMap();
@@ -24,6 +24,7 @@ public class TSP_Driver {
         //mu.Mutation_Swap();
 
         Crossover cross = new Crossover(pop);
-        cross.Crossover_Order(pop.GetASingleTour(0), pop.GetASingleTour(2));
+        //cross.Crossover_Order(pop.GetASingleTour(0), pop.GetASingleTour(2));
+        cross.Crossover_PMX(pop.GetASingleTour(0), pop.GetASingleTour(2));
     }
 }

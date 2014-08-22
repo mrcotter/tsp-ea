@@ -32,7 +32,10 @@ public class Mutation {
 		Node temp = individual.GetANode(RandomPos_2);
 		individual.DeleteANode(RandomPos_2);
 		individual.SetANode(RandomPos_1+1, temp);
-	}
+
+        System.out.println(individual.toString());
+
+    }
 	
 	
 	//Mutation by using swap method
@@ -56,8 +59,11 @@ public class Mutation {
 		Node node_2 = individual.GetANode(RandomPos_2);
 		
 		individual.SetANode(RandomPos_1, node_2);
-		individual.SetANode(RandomPos_2, node_1);	
-	}
+		individual.SetANode(RandomPos_2, node_1);
+
+        System.out.println(individual.toString());
+
+    }
 	
 	//Mutation by using inversion
 	public void Mutation_Inversion()

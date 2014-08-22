@@ -1,81 +1,54 @@
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 
 public class Crossover {
-	
-	Individual Parent_1;
-	Individual Parent_2;
-	
-	public Crossover(Individual Parent_1, Individual Parent_2)
-	{
-		this.Parent_1 = Parent_1;
-		this.Parent_2 = Parent_2;
-	}
-	
+
+    ArrayList<Individual> tours;
+
+    public Crossover(Population pop) {
+        tours = pop.GetAllTours();
+    }
+
 	//Order crossover
-	public Individual Crossover_Order()
-	{
-		Individual Child = new Individual();
-		
-		int[] Random_Int = new int[Parent_1.NumberOfNodes()];
-		
-		for (int j = 0; j < Random_Int.length; j++)
-		{
-			Random_Int[j] = j;
-		}
-		
-		Collections.shuffle(Arrays.asList(Random_Int));
-		
-		int RandomPos_1 = Random_Int[0];
-		long seed = System.nanoTime();
-		Random rand = new Random(seed);
-		int RandomPos_2 = Random_Int[rand.nextInt(Parent_1.NumberOfNodes()-1) + 1];
-		
-		if(RandomPos_1 > RandomPos_2)
-		{
-			for(int i = RandomPos_2; i <= RandomPos_1; i++)
-			{
-				Child.SetANode(i, Parent_1.GetANode(i));
-			}
-		}
-		
-		if(RandomPos_1 < RandomPos_2)
-		{
-			for(int i = RandomPos_1; i <= RandomPos_2; i++)
-			{
-				Child.SetANode(i, Parent_1.GetANode(i));
-			}
-		}
-		
-		for(int i = 0; i < Parent_2.NumberOfNodes(); i++)
-		{
-			
-			if(Child.IfContainANode(Parent_2.GetANode(i)) == false)
-			{
-				for(int j = 0; j < Child.NumberOfNodes(); j++)
-				{
-					if(Child.GetANode(j) == null)
-					{
-						Child.SetANode(j, Parent_2.GetANode(i));
-					}
-				}
-			}
-		}	
-		
-		
-		return Child;
-	}
+	public void Crossover_Order(Individual parent_1, Individual parent_2) {
+
+        int size = parent_1.NumberOfNodes();
+
+        Random rand = new Random();
+        //Choose two arbitrary parts for start and end from parents
+        int number1 = rand.nextInt(size);
+        int number2 = rand.nextInt(size);
+        //System.out.println(number1 + ", " + number2);
+
+        int start = Math.min(number1, number2);
+        int end = Math.max(number1, number2);
+
+        //Initialise children
+        List<Node> child_1 = new Vector<Node>();
+        List<Node> child_2 = new Vector<Node>();
+
+        List<Node> tour_1 = parent_1.getNodeList();
+        List<Node> tour_2 = parent_2.getNodeList();
+
+        //Copy the part in between the start and end to the children
+        child_1.addAll(tour_1.subList(start, end));
+        child_2.addAll(tour_2.subList(start, end));
+
+        //Do order procedure
+
+
+
+
+    }
 	
 	//PMX crossover
-	public Individual Crossover_PMX()
+	public Individual Crossover_PMX(Individual parent_1, Individual parent_2)
 	{
 		Individual Child = new Individual();
 		Individual SubSet = new Individual();
 		
-		int[] Random_Int = new int[Parent_1.NumberOfNodes()];
+		int[] Random_Int = new int[parent_1.NumberOfNodes()];
 		
 		for (int j = 0; j < Random_Int.length; j++)
 		{
@@ -87,13 +60,13 @@ public class Crossover {
 		int RandomPos_1 = Random_Int[0];
 		long seed = System.nanoTime();
 		Random rand = new Random(seed);
-		int RandomPos_2 = Random_Int[rand.nextInt(Parent_1.NumberOfNodes()-1) + 1];
+		int RandomPos_2 = Random_Int[rand.nextInt(parent_1.NumberOfNodes()-1) + 1];
 		
 		if(RandomPos_1 > RandomPos_2)
 		{
 			for(int i = RandomPos_2; i <= RandomPos_1; i++)
 			{
-				SubSet.SetANode(i, Parent_1.GetANode(i));
+				SubSet.SetANode(i, parent_1.GetANode(i));
 			}
 		}
 		
@@ -101,18 +74,18 @@ public class Crossover {
 		{
 			for(int i = RandomPos_1; i <= RandomPos_2; i++)
 			{
-				SubSet.SetANode(i, Parent_1.GetANode(i));
+				SubSet.SetANode(i, parent_1.GetANode(i));
 			}
 		}
 		
-		for(int i = 0; i < Parent_2.NumberOfNodes(); i++)
+		for(int i = 0; i < parent_2.NumberOfNodes(); i++)
 		{
 			for(int j = 0; j<Child.NumberOfNodes(); j++)
 			{
-				if(Parent_2.GetANode(i) == SubSet.GetANode(j))
+				if(parent_2.GetANode(i) == SubSet.GetANode(j))
 				{
-					Child.SetANode(j, Parent_2.GetANode(i));
-					Child.SetANode(i, Parent_2.GetANode(j));
+					Child.SetANode(j, parent_2.GetANode(i));
+					Child.SetANode(i, parent_2.GetANode(j));
 				}
 			}
 		}
@@ -121,7 +94,7 @@ public class Crossover {
 		{
 			if(Child.GetANode(i) == null)
 			{
-				Child.SetANode(i, Parent_2.GetANode(i));
+				Child.SetANode(i, parent_2.GetANode(i));
 			}
 		}
 		

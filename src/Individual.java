@@ -66,6 +66,11 @@ public class Individual {
 	{
 		return single_tour.size();
 	}
+
+    //Get the list of all nodes in a tour
+    public ArrayList<Node> getNodeList() {
+        return single_tour;
+    }
 	
 	//Calculate the total distance of a single tour
 	public double TotalDistance()

@@ -171,7 +171,60 @@ public class Crossover {
 
     }
 
-	
+	// Cycle Crossover
+        public void Cycle_Crossover(Individual parent_1, Individual parent_2) {
+        int size = parent_1.NumberOfNodes();
+    
+        List<Node> tour_1 = parent_1.getNodeList();
+        List<Node> tour_2 = parent_2.getNodeList();
+        // Initialise children
+        List<Node> child_1 = new Vector<Node>(parent_2.getNodeList());
+        List<Node> child_2 = new Vector<Node>(parent_1.getNodeList());
+        // the current visited indices
+        Set<Integer> Visited_Indices = new HashSet<Integer>(size);
+        // the indices in current cycle
+        List<Integer> Indices = new ArrayList<Integer> (size);
+        // initial the starting index to 0 and the cycle to 1
+        int index = 0;
+        int cycle = 1;
+        
+        while (Visited_Indices.size() < size) {
+            Indices.add(index);
+            
+            Node node = tour_2.get(index);
+            index = tour_1.indexOf(node);
+            
+            while (index != Indices.get(0)) {
+        // add the index to the cycle indices
+                Indices.add(index);
+        // get the node in the tour_2 follow the index
+                node = tour_2.get(index);
+        // get the index of the node in the tour_1
+                index = tour_1.indexOf(node);
+            }
+        // swap the child nodes on the indices found in the even cycle
+            if ((cycle++ % 2) != 0) {
+                for (int i : Indices) {
+                    Node temp = child_1.get(i);
+                    child_1.set(i, child_2.get(i));
+                    child_2.set(i, temp);
+                }
+            }
+            
+            Visited_Indices.addAll(Indices);
+        // determine the next starting index
+            index = (Indices.get(0) + 1) % size;
+            while (Visited_Indices.contains(index) && Visited_Indices.size() < size) {
+                index ++;
+                if (index >= size) {
+                    index = 0;
+                }
+            }
+            Indices.clear();
+        }
+        
+    }
+    
 
 }
 

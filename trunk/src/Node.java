@@ -12,7 +12,6 @@ public class Node {
 
     //Node constructor
     public Node(int id, int[] position) {
-        super();
         this.id = id;
         this.position = position;
     }

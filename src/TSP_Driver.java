@@ -9,14 +9,18 @@ public class TSP_Driver {
         Map map = problem.getMap();
         //map.printNodes();
 
-        // Initialize population
-        //Population pop = new Population(50, map);
-        //pop.toString();
-
+        //--------------------- Testing -------------------
         Individual tour = new Individual(map);
         tour.CreateRandomTour();
         System.out.println(tour.toString());
-        System.out.println(tour.TotalDistance());
+        //System.out.println(tour.TotalDistance());
 
+        //Initialize population
+        //Population pop = new Population(50, map);
+        //System.out.println(pop.toString());
+
+        Mutation mu = new Mutation(tour);
+        mu.Mutation_Insert();
+        //mu.Mutation_Swap();
     }
 }

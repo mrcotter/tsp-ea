@@ -36,9 +36,24 @@ public class Crossover {
         child_2.addAll(tour_2.subList(start, end));
 
         //Do order procedure
+        int current_index = 0;
+        Node current_node_in_tour1, current_node_in_tour2;
+        for (int i = 0; i < size; i++) {
+            current_index = (end + i) % size;
+            current_node_in_tour1 = tour_1.get(current_index);
+            current_node_in_tour2 = tour_2.get(current_index);
 
+            //If child 1 does not contain the current city in tour 2, add it
+            if (!child_1.contains(current_node_in_tour1)) {
+                child_1.add(current_node_in_tour2);
+            }
 
+            //If child 2 does not contain the current city in tour 1, add it
+            if (!child_2.contains(current_node_in_tour1)) {
+                child_2.add(current_node_in_tour1);
+            }
 
+        }
 
     }
 	

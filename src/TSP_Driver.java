@@ -23,8 +23,11 @@ public class TSP_Driver {
         //mu.Mutation_Insert();
         //mu.Mutation_Swap();
 
-        Crossover cross = new Crossover(pop);
+        //Crossover cross = new Crossover(pop);
         //cross.Crossover_Order(pop.GetASingleTour(0), pop.GetASingleTour(2));
         //cross.Crossover_PMX(pop.GetASingleTour(0), pop.GetASingleTour(2));
+
+        Selection select= new Selection();
+        select.Selection_FPS(pop.GetAllTours());
     }
 }

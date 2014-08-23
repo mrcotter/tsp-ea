@@ -78,11 +78,11 @@ public class Individual {
 	//Calculate the total distance of a single tour
 	public double TotalDistance()
 	{
-		double TotalDistance = 0;
+		double TotalDistance = 0.0;
 		Node Node_Start;
 		Node Node_End;
 		
-		for(int i = 0; i < single_tour.size(); i++)
+		for (int i = 0; i < single_tour.size(); i++)
 		{
 			Node_Start = GetANode(i);
 			

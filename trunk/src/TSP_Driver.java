@@ -17,7 +17,7 @@ public class TSP_Driver {
 
         //Initialize population
         Population pop = new Population(50, map);
-        System.out.println(pop.toString());
+        //System.out.println(pop.toString());
 
         //Mutation mu = new Mutation(tour);
         //mu.Mutation_Insert();

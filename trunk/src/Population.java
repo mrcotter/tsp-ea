@@ -8,18 +8,23 @@ public class Population {
 	
 	//Create a population for individuals
 	private ArrayList<Individual> multiple_tours;
+
+    //Fitness for all the tours in the population
+    private ArrayList<Double> raw_fitness;
 	
 	//Define the constructor to initialize the population
 	public Population(int Population_Size, Map map)
 	{
 		multiple_tours = new ArrayList<Individual>(Population_Size);
 		
-		for(int i = 0; i < Population_Size; i++)
+		for (int i = 0; i < Population_Size; i++)
 		{
 			Individual single_tour = new Individual(map);
 			single_tour.CreateRandomTour();
 			AddASingleTour(i, single_tour);
 		}
+
+        GetRawFitness();
 	}
 	
 	//Define the second constructor to create additional population
@@ -60,6 +65,16 @@ public class Population {
 		
 		return Shortest;	
 	}
+
+    //Calculate and collect the raw fitness for all the tours
+    public ArrayList<Double> GetRawFitness() {
+        for (Individual tour: multiple_tours) {
+            raw_fitness.add(tour.TotalDistance());
+        }
+
+        return raw_fitness;
+    }
+
 	
 	//Return the size of the population
 	public int PopulationSize()

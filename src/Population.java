@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Population represents a set of solutions.
@@ -8,12 +7,12 @@ import java.util.Arrays;
 public class Population {
 	
 	//Create a population for individuals
-	private Individual multiple_tours[]; 
+	private ArrayList<Individual> multiple_tours;
 	
 	//Define the constructor to initialize the population
 	public Population(int Population_Size, Map map)
 	{
-		multiple_tours = new Individual[Population_Size];
+		multiple_tours = new ArrayList<Individual>(Population_Size);
 		
 		for(int i = 0; i < Population_Size; i++)
 		{
@@ -26,24 +25,24 @@ public class Population {
 	//Define the second constructor to create additional population
 	public Population(int Population_Size)
 	{
-		multiple_tours = new Individual[Population_Size];
+        multiple_tours = new ArrayList<Individual>(Population_Size);
 	}
 	
 	//Add an individual to the population
 	public void AddASingleTour(int index, Individual single_tour)
 	{
-		multiple_tours[index] = single_tour;
+		multiple_tours.add(index, single_tour);
 	}
 	
 	//Get an individual from the population
 	public Individual GetASingleTour(int index)
 	{
-		return multiple_tours[index];
+		return multiple_tours.get(index);
 	}
 
     //Get all tours from population
     public ArrayList<Individual> GetAllTours() {
-        return new ArrayList<Individual>(Arrays.asList(multiple_tours));
+        return multiple_tours;
     }
 	
 	//Find out the shortest tour from the population
@@ -51,7 +50,7 @@ public class Population {
 	{
 		Individual Shortest = GetASingleTour(0);
 		
-		for(int i = 0; i < multiple_tours.length; i++)
+		for(int i = 0; i < multiple_tours.size(); i++)
 		{
 			if(Shortest.TotalDistance() > GetASingleTour(i).TotalDistance())
 			{
@@ -65,12 +64,12 @@ public class Population {
 	//Return the size of the population
 	public int PopulationSize()
 	{
-		return multiple_tours.length;
+		return multiple_tours.size();
 	}
 
     @Override
     public String toString() {
-        String result = null;
+        String result = "";
         for (Individual multiple_tour : multiple_tours) {
             result += multiple_tour.toString() + "\n";
         }

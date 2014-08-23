@@ -10,14 +10,14 @@ public class TSP_Driver {
         //map.printNodes();
 
         //--------------------- Testing -------------------
-        Individual tour = new Individual(map);
-        tour.CreateRandomTour();
+        //Individual tour = new Individual(map);
+        //tour.CreateRandomTour();
         //System.out.println(tour.toString());
         //System.out.println(tour.TotalDistance());
 
         //Initialize population
         Population pop = new Population(50, map);
-        //System.out.println(pop.toString());
+        System.out.println(pop.toString());
 
         //Mutation mu = new Mutation(tour);
         //mu.Mutation_Insert();
@@ -25,6 +25,6 @@ public class TSP_Driver {
 
         Crossover cross = new Crossover(pop);
         //cross.Crossover_Order(pop.GetASingleTour(0), pop.GetASingleTour(2));
-        cross.Crossover_PMX(pop.GetASingleTour(0), pop.GetASingleTour(2));
+        //cross.Crossover_PMX(pop.GetASingleTour(0), pop.GetASingleTour(2));
     }
 }

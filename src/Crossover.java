@@ -1,6 +1,9 @@
 
 import java.util.*;
 
+/**
+ * Crossover represents a set of crossover operators for permutations
+ */
 
 public class Crossover {
 

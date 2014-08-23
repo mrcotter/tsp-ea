@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Crossover {
 
-    ArrayList<Individual> parents;
-    ArrayList<Individual> offsprings;
+    private ArrayList<Individual> parents;
+    private ArrayList<Individual> offsprings;
 
     public Crossover(Population pop) {
         parents = pop.GetAllTours();
@@ -266,6 +266,14 @@ public class Crossover {
             Indices.clear();
         }
 
+    }
+
+    public ArrayList<Individual> getParents() {
+        return parents;
+    }
+
+    public ArrayList<Individual> getOffsprings() {
+        return offsprings;
     }
 
 }

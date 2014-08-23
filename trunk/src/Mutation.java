@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+/**
+ * Mutation represents a set of mutation operators for permutations
+ */
 
 public class Mutation {
 	

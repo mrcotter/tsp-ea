@@ -16,13 +16,10 @@ public class Individual {
 		this.map = map;
 	}
 	
-	//Create a empty tour
-	public Individual()
+	//Construct a tour from an ArrayList
+	public Individual(ArrayList<Node> nodes)
 	{
-		for(int i = 0; i < map.NumberOfNodes(); i++)
-		{
-			single_tour.add(null);
-		}
+	    single_tour = new ArrayList<Node>(nodes);
 	}
 	
 	//Create a random tour

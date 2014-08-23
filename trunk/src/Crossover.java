@@ -4,10 +4,11 @@ import java.util.*;
 
 public class Crossover {
 
-    ArrayList<Individual> tours;
+    ArrayList<Individual> parents;
+    ArrayList<Individual> offsprings;
 
     public Crossover(Population pop) {
-        tours = pop.GetAllTours();
+        parents = pop.GetAllTours();
     }
 
     //Order crossover
@@ -59,6 +60,10 @@ public class Crossover {
         //Rotate the list so that the elements are in the right place
         Collections.rotate(child_1, start);
         Collections.rotate(child_2, start);
+
+        //Add to the offspring list
+        offsprings.add(new Individual(new ArrayList<Node>(child_1)));
+        offsprings.add(new Individual(new ArrayList<Node>(child_2)));
 
         /*
         //Output test for parents
@@ -187,6 +192,10 @@ public class Crossover {
         for (int i: emptyList_2) {
             child_2.set(i, copy_tour_1.remove(0));
         }
+
+        //Add to the offspring list
+        offsprings.add(new Individual(new ArrayList<Node>(child_1)));
+        offsprings.add(new Individual(new ArrayList<Node>(child_2)));
 
         /*
         //Output test for parents

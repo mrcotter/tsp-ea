@@ -48,7 +48,6 @@ public class Selection {
         int ranked_sum = getRanked_fitness(tours);
         //System.out.println(ranked_tours.get(0).toString());
 
-
         //Pick k members based on their ranks
         for (int i = 0; i < tournament_size; i++) {
 
@@ -75,6 +74,20 @@ public class Selection {
         }*/
 
         return tournament_pool.get(0);
+    }
+
+    public ArrayList<Individual> Selection_Elitism(ArrayList<Individual> tours, int num) {
+
+        ArrayList<Individual> elites = new ArrayList<Individual>(num);
+        ArrayList<Individual> sorted_tours = new ArrayList<Individual>(tours);
+
+        Collections.sort(sorted_tours);
+
+        for (int i = 0; i < num; i++) {
+            elites.add(sorted_tours.get(i));
+        }
+
+        return elites;
     }
 
 
@@ -128,6 +141,5 @@ public class Selection {
 
         return shortest;
     }
-
 
 }

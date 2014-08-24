@@ -13,7 +13,7 @@ public class Selection {
 
     public Selection() {}
 
-    //Fitness-Proportionate Selection
+    //Fitness-Proportionate Selection (RWS)
     public Individual Selection_FPS(ArrayList<Individual> tours) {
 
         getRawFitness(tours);    //Move to GA later

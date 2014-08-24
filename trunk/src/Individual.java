@@ -5,12 +5,13 @@ import java.util.Collections;
  * Individual represents a possible solution to the TSP as a permutation of the given nodes.
  */
 
-public class Individual {
+public class Individual implements Comparable<Individual> {
 	
 	private ArrayList<Node> single_tour = new ArrayList<Node>();
 	private Map map;
-	
-	//Initialize a tour
+    private Individual tour;
+
+    //Initialize a tour
 	public Individual(Map map)
 	{
 		this.map = map;
@@ -113,5 +114,13 @@ public class Individual {
         return result;
     }
 
+    @Override
+    public int compareTo(Individual tour) {
+        if (this.TotalDistance() == tour.TotalDistance()) {
+            return 0;
+        } else {
+            return this.TotalDistance() > tour.TotalDistance() ? 1 : -1;
+        }
+    }
 }
 

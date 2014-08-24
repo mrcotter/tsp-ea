@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.Random;
 
 /**
  * Selection represents fitness based competition to select parents and offsprings
@@ -44,21 +44,29 @@ public class Selection {
     //Tournament Selection
     public Individual Selection_Tournament(ArrayList<Individual> tours, int tournament_size) {
 
-        int ranked_sum = getRanked_fitness(tours);
+        ArrayList<Individual> tournament_pool = new ArrayList<Individual>(tournament_size);
 
-        double sum_of_probability = 0.0;
-        double decision = Math.random() * ranked_sum;
+        getRanked_fitness(tours);
+        //System.out.println(ranked_tours.get(0).toString());
 
+        //Pick k members based on their ranks
         for (int i = 0; i < tournament_size; i++) {
-            if (decision >= sum_of_probability && decision <= (sum_of_probability + ranked_fitness.get(i))) {
-                System.out.println(ranked_tours.get(i).toString());
-                return ranked_tours.get(i);
-            }
 
-            sum_of_probability += ranked_fitness.get(i);
+            Random rand = new Random();
+            int index = rand.nextInt(tours.size());
+            //System.out.println(index);
+
+            tournament_pool.add(ranked_tours.get(index));
         }
 
-        return null;
+        //Select the best of them
+        Collections.sort(tournament_pool);
+
+        /*for (Individual tour: tournament_pool) {
+            System.out.println(tour.toString() + "    " + tour.TotalDistance());
+        }*/
+
+        return tournament_pool.get(0);
     }
 
 
@@ -75,37 +83,24 @@ public class Selection {
     }
 
     //Calculate the ranks for given tours
-    private int getRanked_fitness(ArrayList<Individual> tours) {
+    private void getRanked_fitness(ArrayList<Individual> tours) {
 
         int size = tours.size();
         ranked_tours = new ArrayList<Individual>(tours);
         ranked_fitness = new ArrayList<Integer>(size);
 
         //Sort the list based on total distance
-        Collections.sort(ranked_tours, new Comparator<Individual>() {
-            @Override
-            public int compare(Individual tour_1, Individual tour_2) {
+        Collections.sort(ranked_tours);
 
-                if (tour_1.TotalDistance() == tour_2.TotalDistance()) {
-                    return 0;
-                } else {
-                    return tour_1.TotalDistance() > tour_2.TotalDistance() ? 1 : -1;
-                }
-            }
-        });
-
-        /*
-        for (Individual tour: copy_tours) {
+        /*for (Individual tour: ranked_tours) {
             System.out.println(tour.toString() + "    " + tour.TotalDistance());
         }*/
 
-        int sum = 0;
         for (int i = 1; i <= size; i++) {
-            sum += i;
             ranked_fitness.add(i);
         }
 
-        return sum;
+        //System.out.println(ranked_fitness.toString());
     }
 
     //Find out the shortest tour from the tournament pool or other collections of tours

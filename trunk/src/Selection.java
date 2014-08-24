@@ -127,19 +127,4 @@ public class Selection {
         return ranked_sum;
     }
 
-    //Find out the shortest tour from the tournament pool or other collections of tours
-    public Individual findShortest(ArrayList<Individual> tours) {
-
-        Individual shortest = tours.get(0);
-
-        for(int i = 1; i < tours.size(); i++) {
-
-            if (shortest.TotalDistance() > tours.get(i).TotalDistance()) {
-                shortest = tours.get(i);
-            }
-        }
-
-        return shortest;
-    }
-
 }

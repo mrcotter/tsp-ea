@@ -30,5 +30,6 @@ public class TSP_Driver {
         Selection select= new Selection();
         //select.Selection_FPS(pop.GetAllTours());
         select.Selection_Tournament(pop.GetAllTours(), 5);
+
     }
 }

@@ -44,22 +44,6 @@ public class Population {
     public ArrayList<Individual> GetAllTours() {
         return multiple_tours;
     }
-	
-	//Find out the shortest tour from the population
-	public Individual FindShortest()
-	{
-		Individual Shortest = GetASingleTour(0);
-		
-		for(int i = 0; i < multiple_tours.size(); i++)
-		{
-			if(Shortest.TotalDistance() > GetASingleTour(i).TotalDistance())
-			{
-				Shortest = GetASingleTour(i);
-			}
-		}
-		
-		return Shortest;	
-	}
 
 	
 	//Return the size of the population

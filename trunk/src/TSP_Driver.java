@@ -28,6 +28,7 @@ public class TSP_Driver {
         //cross.Crossover_PMX(pop.GetASingleTour(0), pop.GetASingleTour(2));
 
         Selection select= new Selection();
-        select.Selection_FPS(pop.GetAllTours());
+        //select.Selection_FPS(pop.GetAllTours());
+        select.Selection_Tournament(pop.GetAllTours(), 5);
     }
 }

@@ -5,13 +5,17 @@ import java.text.NumberFormat;
 public class TSP_Driver {
     public static void main(String[] args) throws Exception {
 
-        long start = System.currentTimeMillis();
-
         TSPProblem problem = new TSPProblem(new File("./data/eil10.tsp"));
         //problem.printProblem();
 
-        Map map = problem.getMap();
+        //Map map = problem.getMap();
         //map.printNodes();
+
+
+        long start = System.currentTimeMillis();
+
+        String pop_size = null, generations;
+        double mut_rate, cross_rate;
 
         //--------------------- Testing -------------------
         //Individual tour = new Individual(map);
@@ -39,7 +43,7 @@ public class TSP_Driver {
         long end = System.currentTimeMillis();
         //Calculate program running time
         NumberFormat formatter = new DecimalFormat("#0.00000");
-        System.out.print("Execution time is " + formatter.format((end - start) / 1000d) + " seconds");
+        System.out.println("\nExecution time is " + formatter.format((end - start) / 1000d) + " seconds");
 
     }
 }

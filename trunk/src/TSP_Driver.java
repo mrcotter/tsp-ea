@@ -1,18 +1,17 @@
 import java.io.File;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class TSP_Driver {
     public static void main(String[] args) throws Exception {
+
+        long start = System.currentTimeMillis();
 
         TSPProblem problem = new TSPProblem(new File("./data/eil10.tsp"));
         //problem.printProblem();
 
         Map map = problem.getMap();
         //map.printNodes();
-
-        //Initialise population
-        Population pop = new Population(50, map);
-
-
 
         //--------------------- Testing -------------------
         //Individual tour = new Individual(map);
@@ -36,6 +35,11 @@ public class TSP_Driver {
         //select.Selection_FPS(pop.GetAllTours());
         //select.getRanked_fitness(pop.GetAllTours());
         //select.Selection_Tournament(pop.GetAllTours(), 5);
+
+        long end = System.currentTimeMillis();
+        //Calculate program running time
+        NumberFormat formatter = new DecimalFormat("#0.00000");
+        System.out.print("Execution time is " + formatter.format((end - start) / 1000d) + " seconds");
 
     }
 }

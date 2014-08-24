@@ -9,6 +9,11 @@ public class TSP_Driver {
         Map map = problem.getMap();
         //map.printNodes();
 
+        //Initialise population
+        Population pop = new Population(50, map);
+
+
+
         //--------------------- Testing -------------------
         //Individual tour = new Individual(map);
         //tour.CreateRandomTour();
@@ -16,7 +21,7 @@ public class TSP_Driver {
         //System.out.println(tour.TotalDistance());
 
         //Initialize population
-        Population pop = new Population(50, map);
+        //Population pop = new Population(50, map);
         //System.out.println(pop.toString());
 
         //Mutation mu = new Mutation(tour);
@@ -27,10 +32,10 @@ public class TSP_Driver {
         //cross.Crossover_Order(pop.GetASingleTour(0), pop.GetASingleTour(2));
         //cross.Crossover_PMX(pop.GetASingleTour(0), pop.GetASingleTour(2));
 
-        Selection select= new Selection();
+        //Selection select= new Selection();
         //select.Selection_FPS(pop.GetAllTours());
         //select.getRanked_fitness(pop.GetAllTours());
-        select.Selection_Tournament(pop.GetAllTours(), 5);
+        //select.Selection_Tournament(pop.GetAllTours(), 5);
 
     }
 }

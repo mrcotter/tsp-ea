@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 /**
  * Selection represents fitness based competition to select parents and offsprings
@@ -46,17 +45,26 @@ public class Selection {
 
         ArrayList<Individual> tournament_pool = new ArrayList<Individual>(tournament_size);
 
-        getRanked_fitness(tours);
+        int ranked_sum = getRanked_fitness(tours);
         //System.out.println(ranked_tours.get(0).toString());
+
 
         //Pick k members based on their ranks
         for (int i = 0; i < tournament_size; i++) {
 
-            Random rand = new Random();
-            int index = rand.nextInt(tours.size());
-            //System.out.println(index);
+            int sum_of_probability = 0;
+            int decision = (int) (Math.random() * ranked_sum);
+            //System.out.println(decision);
+            for (int j = 0; j < tours.size(); j++) {
 
-            tournament_pool.add(ranked_tours.get(index));
+                //System.out.println(sum_of_probability);
+                if (decision >= sum_of_probability && decision <= (sum_of_probability + ranked_fitness.get(j))) {
+                    tournament_pool.add(ranked_tours.get(j));
+                }
+
+                sum_of_probability += ranked_fitness.get(j);
+            }
+
         }
 
         //Select the best of them
@@ -83,7 +91,7 @@ public class Selection {
     }
 
     //Calculate the ranks for given tours
-    private void getRanked_fitness(ArrayList<Individual> tours) {
+    private int getRanked_fitness(ArrayList<Individual> tours) {
 
         int size = tours.size();
         ranked_tours = new ArrayList<Individual>(tours);
@@ -96,11 +104,14 @@ public class Selection {
             System.out.println(tour.toString() + "    " + tour.TotalDistance());
         }*/
 
+        int ranked_sum = 0;
         for (int i = 1; i <= size; i++) {
+            ranked_sum += i;
             ranked_fitness.add(i);
         }
 
         //System.out.println(ranked_fitness.toString());
+        return ranked_sum;
     }
 
     //Find out the shortest tour from the tournament pool or other collections of tours

@@ -7,14 +7,17 @@ import java.util.Collections;
 
 public class GA {
 
-    private int pop_size, generation, mut_type, cross_type, sel_type;
+    private int pop_size, generation, mut_type, cross_type, sel_type, elitism_size;
     private double mut_rate, cross_rate;
+    private boolean elitism;
 
     private TSPProblem tsp;
     private ArrayList<Individual> next_generation;
 
-    public GA(TSPProblem tsp, int pop_size, int generations, double mut_rate,
-              int mut_type, double cross_rate, int cross_type, int sel_type) {
+
+
+    public GA(TSPProblem tsp, int pop_size, int generations, double mut_rate, int mut_type,
+              double cross_rate, int cross_type, int sel_type, boolean elitism, int elitism_size) {
 
         this.tsp = tsp;
         this.pop_size = pop_size;
@@ -24,11 +27,17 @@ public class GA {
         this.cross_rate = cross_rate;
         this.cross_type = cross_type;
         this.sel_type = sel_type;
+        this.elitism = elitism;
+        this.elitism_size = elitism_size;
     }
 
     public void runGA() {
         //Initialisation
         Population pop = new Population(pop_size, tsp.getMap());
+        int elitism_offset = 0;
+        if (elitism) {
+
+        }
 
         //Select parents for the mating pool
         Selection select = new Selection();
@@ -45,6 +54,10 @@ public class GA {
                 for (int i = 0; i < pop.PopulationSize(); i++) {
                     parents.add(select.Selection_Tournament(pop.GetAllTours(), 5));
                 }
+                break;
+
+            case 3:     //Elitism
+
                 break;
         }
 

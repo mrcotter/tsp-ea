@@ -275,6 +275,100 @@ public class Crossover {
         //System.out.println(offsprings.get(1).toString());
     }
 
+        // Edge Recombination Crossover
+        public void Edge_Recombination_Crossover(Individual parent_1, Individual parent_2) {
+                
+        ArrayList<Node> tour_1 = parent_1.getNodeList();
+        ArrayList<Node> tour_2 = parent_2.getNodeList();
+         // Initialise children
+        ArrayList<Node> child = new ArrayList<Node>();
+        // Initialise the adjacency lists for nodes in the tour 1 and tour 2
+        HashMap<Node, ArrayList<Node>> neighborsList=new HashMap<Node, ArrayList<Node>>();
+        // iterate over each node in tour 1
+        for(Node i:tour_1){
+        ArrayList<Node>neighbors = new ArrayList<Node>();
+        int index=tour_1.indexOf(i);
+        int size=tour_1.size();
+        if(index==0){
+            neighbors.add(tour_1.get(index+1));
+            neighbors.add(tour_1.get(size-1));
+        }
+        else if(index==size-1){
+            neighbors.add(tour_1.get(index-1));
+            neighbors.add(tour_1.get(0));
+        }
+        else{
+            neighbors.add(tour_1.get(index-1));
+            neighbors.add(tour_1.get(index+1));
+        }
+            neighborsList.put(i, neighbors);
+        }
+        // iterate over each node in tour 2
+        for(Node i:tour_2){
+            ArrayList<Node>neighbors = new ArrayList<Node>();
+            int index=tour_2.indexOf(i);
+            int size=tour_1.size();
+                if(index==0){
+                    neighbors.add(tour_2.get(index+1));
+                    neighbors.add(tour_2.get(size-1));
+                }
+                else if(index==size-1){
+                    neighbors.add(tour_2.get(index-1));
+                    neighbors.add(tour_2.get(0));
+                }
+                else{
+                    neighbors.add(tour_2.get(index-1));
+                    neighbors.add(tour_2.get(index+1));
+                }
+                    neighborsList.get(i).removeAll(neighbors);
+                    neighborsList.get(i).addAll(neighbors);
+                }
+                    
+                Node s=tour_1.get(0);
+                while (true){
+                    child.add(s);
+                    
+                // stop when child is full
+                if(child.size()==tour_1.size()){
+                    break;
+                }
+                    
+                for(Node i:neighborsList.keySet()){
+                    neighborsList.get(i).remove(s);
+                }
+                    
+                ArrayList<Node> neighbors=neighborsList.get(s);
+                if(!neighbors.isEmpty()){
+                    int min=4;
+                    ArrayList<Node> choices = new ArrayList<Node>();
+                    for(Node i:neighbors){
+                        int size=neighborsList.get(i).size();
+                        if(size<min){
+                            choices.clear();
+                            choices.add(i);
+                            min=size;
+                        }
+                        else if(size==min){
+                            choices.add(i);
+                        }
+                    }
+                    s=choices.get((int)Math.random()*choices.size());
+                }
+                else
+                {
+                    ArrayList<Node> temp=new ArrayList<Node>(tour_1);
+                    temp.removeAll(child);
+                    s=temp.get((int)Math.random()*temp.size());
+                }
+                
+        //Add to the offspring list
+        offsprings.add(new Individual(new ArrayList<Node>(child)));
+        
+        //System.out.println(offsprings.get(0).toString());
+
+            }
+                }
+
     public ArrayList<Individual> getOffsprings() {
         return offsprings;
     }

@@ -35,13 +35,13 @@ public class GA {
         ArrayList<Individual> parents = new ArrayList<Individual>();
         switch (sel_type) {
 
-            case 1:
+            case 1:     //FPS
                 for (int i = 0; i < pop.PopulationSize(); i++) {
                     parents.add(select.Selection_FPS(pop.GetAllTours()));
                 }
                 break;
 
-            case 2:
+            case 2:     //Tournament
                 for (int i = 0; i < pop.PopulationSize(); i++) {
                     parents.add(select.Selection_Tournament(pop.GetAllTours(), 5));
                 }
@@ -49,8 +49,9 @@ public class GA {
         }
 
         //Shuffle the mating pool
-        Collections.shuffle(pop.GetAllTours());
+        Collections.shuffle(parents);
 
+        //For each consecutive pair apply crossover with a given probability, otherwise copy parents
 
 
     }

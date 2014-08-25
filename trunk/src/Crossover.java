@@ -264,9 +264,10 @@ public class Crossover {
                     index = 0;
                 }
             }
-            Indices.clear();
         }
-
+            //Add to the offspring list
+        offsprings.add(new Individual(new ArrayList<Node>(child_1)));
+        offsprings.add(new Individual(new ArrayList<Node>(child_2)));
     }
 
 

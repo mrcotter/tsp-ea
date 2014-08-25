@@ -34,6 +34,9 @@ public class GA {
     public void runGA() {
         //Initialisation
         Population pop = new Population(pop_size, tsp.getMap());
+        Selection select = new Selection();
+        Crossover crossover = new Crossover();
+        Mutation mutation = new Mutation();
         next_generation = new ArrayList<Individual>(pop_size);
 
         if (!elitism) {
@@ -41,7 +44,7 @@ public class GA {
         }
 
         //Select parents for the mating pool
-        Selection select = new Selection();
+
         //ArrayList<Individual> parents = new ArrayList<Individual>(pop.GetAllTours().size());
 
         if (elitism) {

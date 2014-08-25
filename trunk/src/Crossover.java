@@ -8,7 +8,7 @@ import java.util.*;
 public class Crossover {
 
     //private ArrayList<Individual> parents;
-    private ArrayList<Individual> offsprings;
+    private ArrayList<Individual> offsprings = new ArrayList<Individual>();
 
     public Crossover() {}
 

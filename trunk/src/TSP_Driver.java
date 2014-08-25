@@ -102,7 +102,7 @@ public class TSP_Driver {
 
         Collections.sort(tours);
 
-        System.out.println("Final result: " + tours.get(0).TotalDistance());
+        System.out.println("Final Distance: " + tours.get(0).TotalDistance());
 
 
         long end = System.currentTimeMillis();

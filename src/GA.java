@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * GA represents the process of evolving population algorithms
@@ -11,17 +10,11 @@ public class GA {
     private double mut_rate, cross_rate;
     private boolean elitism;
 
-    private TSPProblem tsp;
-    private ArrayList<Individual> next_generation;
 
-
-
-    public GA(TSPProblem tsp, int pop_size, int generations, double mut_rate, int mut_type,
+    public GA(int pop_size, double mut_rate, int mut_type,
               double cross_rate, int cross_type, int sel_type, boolean elitism, int elitism_size) {
 
-        this.tsp = tsp;
         this.pop_size = pop_size;
-        this.generation = generations;
         this.mut_rate = mut_rate;
         this.mut_type = mut_type;
         this.cross_rate = cross_rate;
@@ -31,40 +24,85 @@ public class GA {
         this.elitism_size = elitism_size;
     }
 
-    public void runGA() {
+    public ArrayList<Individual> runGA(ArrayList<Individual> tours) {
+
         //Initialisation
-        Population pop = new Population(pop_size, tsp.getMap());
         Selection select = new Selection();
         Crossover crossover = new Crossover();
         Mutation mutation = new Mutation();
-        next_generation = new ArrayList<Individual>(pop_size);
+        ArrayList<Individual> next_generation = new ArrayList<Individual>(pop_size);
 
         if (!elitism) {
             elitism_size = 0;
         }
 
-        //Select parents for the mating pool
-
-        //ArrayList<Individual> parents = new ArrayList<Individual>(pop.GetAllTours().size());
-
         if (elitism) {
-            next_generation.addAll(select.Selection_Elitism(pop.GetAllTours(), elitism_size));
+            next_generation.addAll(select.Selection_Elitism(tours, elitism_size));
         }
 
+
+        Individual parent_1 = null, parent_2 = null;
         for (int i = elitism_size; i < pop_size/2; i++) {
 
+            //Select parents for the mating pool
             switch (sel_type) {
-
                 case 1:     //FPS
-                    Individual parent
+                    parent_1 = select.Selection_FPS(tours);
+                    parent_2 = select.Selection_FPS(tours);
+                    break;
+
+                case 2:     //Tournament
+                    parent_1 = select.Selection_Tournament(tours, 5);
+                    parent_2 = select.Selection_Tournament(tours, 5);
+                    break;
+            }
+
+            //Crossover parents
+            switch (cross_type) {
+                case 1:     //Order
+                    crossover.Crossover_Order(parent_1, parent_2);
+                    break;
+
+                case 2:     //PMX
+                    crossover.Crossover_PMX(parent_1, parent_2);
+                    break;
+
+                case 3:     //Cycle
+                    crossover.Crossover_Cycle(parent_1, parent_2);
+                    break;
+
+                case 4:
+
+                    break;
             }
         }
 
-        //Shuffle the mating pool
-        Collections.shuffle(next_generation);
+        next_generation.addAll(crossover.getOffsprings());
+        crossover.clear();
 
-        //For each consecutive pair apply crossover with a given probability, otherwise copy parents
+        //Mutate the next generation a bit
+        for (int i = elitism_size; i < pop_size; i++) {
+            switch (mut_type) {
+                case 1:     //Insert
+                    mutation.Mutation_Insert(next_generation.get(i));
+                    break;
 
+                case 2:     //Swap
+                    mutation.Mutation_Swap(next_generation.get(i));
+                    break;
+
+                case 3:     //Inversion
+                    mutation.Mutation_Inversion(next_generation.get(i));
+                    break;
+
+                case 4:
+                    mutation.Mutation_Scramble(next_generation.get(i));
+                    break;
+            }
+        }
+
+        //Return next_generation;
+        return next_generation;
 
     }
 

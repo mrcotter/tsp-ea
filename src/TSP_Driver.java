@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class TSP_Driver {
     public static void main(String[] args) throws Exception {
@@ -82,16 +84,31 @@ public class TSP_Driver {
 
         TSPProblem tsp = new TSPProblem(new File("./data/" + file_name));
         //problem.printProblem();
-
-        //Map map = problem.getMap();
+        Map map = tsp.getMap();
         //map.printNodes();
+        Population pop = new Population(pop_size, map);
+        ArrayList<Individual> tours = pop.GetAllTours();
+
 
         long start = System.currentTimeMillis();
 
         //Start GA
-        GA ga = new GA(tsp, pop_size, generations, mut_rate, mut_type,
+        GA ga = new GA(pop_size, mut_rate, mut_type,
                         cross_rate, cross_type, sel_type, elitism, elitism_size);
-        ga.runGA();
+
+        for (int i = 0; i < generations; i++) {
+            tours = ga.runGA(tours);
+        }
+
+        Collections.sort(tours);
+
+        System.out.println("Final result: " + tours.get(0).TotalDistance());
+
+
+        long end = System.currentTimeMillis();
+        //Calculate program running time
+        NumberFormat formatter = new DecimalFormat("#0.00000");
+        System.out.println("\nExecution time is " + formatter.format((end - start) / 1000d) + " seconds");
 
 
         //--------------------- Testing -------------------
@@ -108,7 +125,7 @@ public class TSP_Driver {
         //mu.Mutation_Insert();
         //mu.Mutation_Swap();
 
-        //Crossover cross = new Crossover(pop);
+        //Crossover cross = new Crossover();
         //cross.Crossover_Order(pop.GetASingleTour(0), pop.GetASingleTour(2));
         //cross.Crossover_PMX(pop.GetASingleTour(0), pop.GetASingleTour(2));
 
@@ -117,10 +134,7 @@ public class TSP_Driver {
         //select.getRanked_fitness(pop.GetAllTours());
         //select.Selection_Tournament(pop.GetAllTours(), 5);
 
-        long end = System.currentTimeMillis();
-        //Calculate program running time
-        NumberFormat formatter = new DecimalFormat("#0.00000");
-        System.out.println("\nExecution time is " + formatter.format((end - start) / 1000d) + " seconds");
+
 
     }
 }

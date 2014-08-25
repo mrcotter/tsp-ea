@@ -10,7 +10,6 @@ public class GA {
     private double mut_rate, cross_rate;
     private boolean elitism;
 
-
     public GA(int pop_size, double mut_rate, int mut_type,
               double cross_rate, int cross_type, int sel_type, boolean elitism, int elitism_size) {
 
@@ -90,12 +89,12 @@ public class GA {
         next_generation.addAll(crossover.getOffsprings());
         crossover.clear();
 
-        int count = 0;
+        //int count = 0;
         //Mutate the next generation a bit
         for (int i = elitism_size; i < pop_size; i++) {
 
             if(Math.random() <= mut_rate) {
-                count++;
+                //count++;
                 switch (mut_type) {
                     case 1:     //Insert
                         mutation.Mutation_Insert(next_generation.get(i));

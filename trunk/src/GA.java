@@ -58,48 +58,63 @@ public class GA {
             }
 
             //Crossover parents
-            switch (cross_type) {
-                case 1:     //Order
-                    crossover.Crossover_Order(parent_1, parent_2);
-                    break;
+            if (Math.random() <= cross_rate) {
 
-                case 2:     //PMX
-                    crossover.Crossover_PMX(parent_1, parent_2);
-                    break;
+                switch (cross_type) {
+                    case 1:     //Order
+                        crossover.Crossover_Order(parent_1, parent_2);
+                        break;
 
-                case 3:     //Cycle
-                    crossover.Crossover_Cycle(parent_1, parent_2);
-                    break;
+                    case 2:     //PMX
+                        crossover.Crossover_PMX(parent_1, parent_2);
+                        break;
 
-                case 4:
+                    case 3:     //Cycle
+                        crossover.Crossover_Cycle(parent_1, parent_2);
+                        break;
 
-                    break;
+                    case 4:
+
+                        break;
+                }
+            } else {
+                next_generation.add(parent_1);
+                next_generation.add(parent_2);
             }
+
         }
 
         next_generation.addAll(crossover.getOffsprings());
         crossover.clear();
 
+        int count = 0;
         //Mutate the next generation a bit
         for (int i = elitism_size; i < pop_size; i++) {
-            switch (mut_type) {
-                case 1:     //Insert
-                    mutation.Mutation_Insert(next_generation.get(i));
-                    break;
 
-                case 2:     //Swap
-                    mutation.Mutation_Swap(next_generation.get(i));
-                    break;
+            if(Math.random() <= mut_rate) {
+                count++;
+                switch (mut_type) {
+                    case 1:     //Insert
+                        mutation.Mutation_Insert(next_generation.get(i));
+                        break;
 
-                case 3:     //Inversion
-                    mutation.Mutation_Inversion(next_generation.get(i));
-                    break;
+                    case 2:     //Swap
+                        mutation.Mutation_Swap(next_generation.get(i));
+                        break;
 
-                case 4:
-                    mutation.Mutation_Scramble(next_generation.get(i));
-                    break;
+                    case 3:     //Inversion
+                        mutation.Mutation_Inversion(next_generation.get(i));
+                        break;
+
+                    case 4:     //Scramble
+                        mutation.Mutation_Scramble(next_generation.get(i));
+                        break;
+                }
             }
+
         }
+
+        System.out.println(count);
 
         //Return next_generation;
         return next_generation;

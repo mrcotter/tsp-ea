@@ -9,9 +9,10 @@ public class TSP_Driver {
 
 
         String file_name = "";
-        int pop_size = 0, generations = 0;
+        int pop_size = 0, generations = 0, elitism_size = 0;
         double mut_rate = 0.0, cross_rate = 0.0;
         int mut_type = 0, cross_type = 0, sel_type = 0;
+        boolean elitism = false;
 
         //Read config file
         BufferedReader config_reader = null;
@@ -61,6 +62,15 @@ public class TSP_Driver {
                         if (token_0.equals("sel_type")) {
                             sel_type = Integer.parseInt(token_1);
                         }
+
+                        if (token_0.equals("elitism")) {
+                            if (token_1.toLowerCase().equals("true")) elitism = true;
+                            if (token_1.toLowerCase().equals("false")) elitism = false;
+                        }
+
+                        if (token_0.equals("elitism_size")) {
+                            elitism_size = Integer.parseInt(token_1);
+                        }
                     }
                 }
             }
@@ -80,7 +90,7 @@ public class TSP_Driver {
 
         //Start GA
         GA ga = new GA(tsp, pop_size, generations, mut_rate, mut_type,
-                        cross_rate, cross_type, sel_type);
+                        cross_rate, cross_type, sel_type, elitism, elitism_size);
         ga.runGA();
 
 

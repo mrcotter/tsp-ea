@@ -21,5 +21,11 @@ mut_type=1
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
 cross_type=1
 
-# Selection Type: 1 - FPS, 2 - Tournament, 3 - Elitism
+# Selection Type: 1 - FPS, 2 - Tournament
 sel_type=1
+
+# Use Elitism: true / false
+elitism=false
+
+# Elitism size [0, popsize]
+elitism_size=5

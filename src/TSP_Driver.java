@@ -70,7 +70,7 @@ public class TSP_Driver {
             }
         }
 
-        TSPProblem problem = new TSPProblem(new File("./data/" + file_name));
+        TSPProblem tsp = new TSPProblem(new File("./data/" + file_name));
         //problem.printProblem();
 
         //Map map = problem.getMap();
@@ -79,7 +79,7 @@ public class TSP_Driver {
         long start = System.currentTimeMillis();
 
         //Start GA
-        GA ga = new GA(pop_size, generations, mut_rate, mut_type,
+        GA ga = new GA(tsp, pop_size, generations, mut_rate, mut_type,
                         cross_rate, cross_type, sel_type);
         ga.runGA();
 

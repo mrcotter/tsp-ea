@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class GA {
 
-    private int pop_size, generation, mut_type, cross_type, sel_type, elitism_size;
+    private int pop_size, mut_type, cross_type, sel_type, elitism_size;
     private double mut_rate, cross_rate;
     private boolean elitism;
 
@@ -56,6 +56,9 @@ public class GA {
                     parent_2 = select.Selection_Tournament(tours, 5);
                     break;
             }
+
+            //System.out.println(parent_1.toString() + "  " + parent_1.NumberOfNodes());
+            //System.out.println(parent_2.toString() + "  " + parent_2.NumberOfNodes());
 
             //Crossover parents
             if (Math.random() <= cross_rate) {
@@ -114,7 +117,7 @@ public class GA {
 
         }
 
-        System.out.println(count);
+        //System.out.println(count);
 
         //Return next_generation;
         return next_generation;

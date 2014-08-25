@@ -34,35 +34,31 @@ public class GA {
     public void runGA() {
         //Initialisation
         Population pop = new Population(pop_size, tsp.getMap());
-        int elitism_offset = 0;
-        if (elitism) {
+        next_generation = new ArrayList<Individual>(pop_size);
 
+        if (!elitism) {
+            elitism_size = 0;
         }
 
         //Select parents for the mating pool
         Selection select = new Selection();
-        ArrayList<Individual> parents = new ArrayList<Individual>();
-        switch (sel_type) {
+        //ArrayList<Individual> parents = new ArrayList<Individual>(pop.GetAllTours().size());
 
-            case 1:     //FPS
-                for (int i = 0; i < pop.PopulationSize(); i++) {
-                    parents.add(select.Selection_FPS(pop.GetAllTours()));
-                }
-                break;
+        if (elitism) {
+            next_generation.addAll(select.Selection_Elitism(pop.GetAllTours(), elitism_size));
+        }
 
-            case 2:     //Tournament
-                for (int i = 0; i < pop.PopulationSize(); i++) {
-                    parents.add(select.Selection_Tournament(pop.GetAllTours(), 5));
-                }
-                break;
+        for (int i = elitism_size; i < pop_size/2; i++) {
 
-            case 3:     //Elitism
+            switch (sel_type) {
 
-                break;
+                case 1:     //FPS
+                    Individual parent
+            }
         }
 
         //Shuffle the mating pool
-        Collections.shuffle(parents);
+        Collections.shuffle(next_generation);
 
         //For each consecutive pair apply crossover with a given probability, otherwise copy parents
 

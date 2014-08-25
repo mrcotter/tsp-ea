@@ -215,8 +215,8 @@ public class Crossover {
         */
     }
 
-        // Cycle Crossover
-        public void Cycle_Crossover(Individual parent_1, Individual parent_2) {
+    // Cycle Crossover
+    public void Crossover_Cycle(Individual parent_1, Individual parent_2) {
         int size = parent_1.NumberOfNodes();
     
         List<Node> tour_1 = parent_1.getNodeList();

@@ -49,7 +49,7 @@ public class Mutation {
 			individual.DeleteANode(RandomPos_2);
 		}
 
-        System.out.println(individual.toString());
+        //System.out.println(individual.toString());
 			
 	}
 	

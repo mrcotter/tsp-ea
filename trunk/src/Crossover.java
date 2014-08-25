@@ -7,12 +7,10 @@ import java.util.*;
 
 public class Crossover {
 
-    private ArrayList<Individual> parents;
+    //private ArrayList<Individual> parents;
     private ArrayList<Individual> offsprings;
 
-    public Crossover(Population pop) {
-        parents = pop.GetAllTours();
-    }
+    public Crossover() {}
 
     //Order crossover
     public void Crossover_Order(Individual parent_1, Individual parent_2) {
@@ -271,12 +269,13 @@ public class Crossover {
 
     }
 
-    public ArrayList<Individual> getParents() {
-        return parents;
-    }
 
     public ArrayList<Individual> getOffsprings() {
         return offsprings;
+    }
+
+    public void clear() {
+        offsprings.clear();
     }
 
 }

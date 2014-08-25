@@ -10,13 +10,10 @@ public class Mutation {
 	
 	private Individual individual;
 	
-	public Mutation(Individual individual)
-	{
-		this.individual = individual;
-	}
+	public Mutation() {}
 	
 	//Mutation by using insert method
-	public void Mutation_Insert()
+	public void Mutation_Insert(Individual individual)
 	{
 		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
 		
@@ -58,7 +55,7 @@ public class Mutation {
 	
 	
 	//Mutation by using swap method
-	public void Mutation_Swap()
+	public void Mutation_Swap(Individual individual)
 	{
 		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
 		
@@ -82,7 +79,7 @@ public class Mutation {
 	}
 	
 	//Mutation by using inversion
-	public void Mutation_Inversion()
+	public void Mutation_Inversion(Individual individual)
 	{
 		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
 		
@@ -132,7 +129,7 @@ public class Mutation {
 	}
 	
 	//Mutation by using Scramble
-	public void Mutation_Scramble()
+	public void Mutation_Scramble(Individual individual)
 	{
 		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
 		

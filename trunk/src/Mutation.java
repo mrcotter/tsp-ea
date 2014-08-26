@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class Mutation {
 	
-	private Individual individual;
+	//private Individual individual;
 	
 	public Mutation() {}
 	
@@ -111,6 +111,7 @@ public class Mutation {
 
 		int size = individual.NumberOfNodes();
 		ArrayList<Node> nodes = individual.getNodeList();
+        //System.out.println(individual.toString());
 
 		for (Node node_1: nodes) {
 
@@ -131,6 +132,8 @@ public class Mutation {
 				Collections.shuffle(nodes.subList(lower_index, bigger_index));
 			}
 		}
+
+        //System.out.println(individual.toString() + "\n");
 
 	}
 

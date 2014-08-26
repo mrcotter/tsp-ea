@@ -35,6 +35,7 @@ public class GA {
         Crossover crossover = new Crossover();
         Mutation mutation = new Mutation();
         ArrayList<Individual> next_generation = new ArrayList<Individual>(pop_size);
+        ArrayList<Individual> parents = new ArrayList<Individual>(pop_size);
 
 
         if (sel_type == 1) {
@@ -62,46 +63,53 @@ public class GA {
         Individual parent_1 = null, parent_2 = null;
         for (int i = elitism_size; i < pop_size/2; i++) {
 
-            //Select parents for the mating pool
+            //Select parents
             switch (sel_type) {
                 case 1:     //FPS
                     parent_1 = select.Selection_FPS(tours, raw_fitness);
                     parent_2 = select.Selection_FPS(tours, raw_fitness);
+                    parents.add(parent_1);
+                    parents.add(parent_2);
                     break;
 
                 case 2:     //Tournament
                     parent_1 = select.Selection_Tournament(tours, 2, ranked_fitness, ranked_tours);
                     parent_2 = select.Selection_Tournament(tours, 2, ranked_fitness, ranked_tours);
+                    parents.add(parent_1);
+                    parents.add(parent_2);
                     break;
             }
+        }
 
-            //System.out.println(parent_1.toString() + "  " + parent_1.NumberOfNodes());
-            //System.out.println(parent_2.toString() + "  " + parent_2.NumberOfNodes());
+        Collections.shuffle(parents);
+        //System.out.println(parents.size());
+
+        for (int i = 0; i < parents.size(); i = i + 2) {
 
             //Crossover parents
             if (Math.random() <= cross_rate) {
 
                 switch (cross_type) {
                     case 1:     //Order
-                        crossover.Crossover_Order(parent_1, parent_2);
+                        crossover.Crossover_Order(parents.get(i), parents.get(i+1));
                         break;
 
                     case 2:     //PMX
-                        crossover.Crossover_PMX(parent_1, parent_2);
+                        crossover.Crossover_PMX(parents.get(i), parents.get(i+1));
                         break;
 
                     case 3:     //Cycle
-                        crossover.Crossover_Cycle(parent_1, parent_2);
+                        crossover.Crossover_Cycle(parents.get(i), parents.get(i+1));
                         break;
 
                     case 4:
-                        crossover.Crossover_Edge_Recombination(parent_1, parent_2);
-                        crossover.Crossover_Edge_Recombination(parent_2, parent_1);
+                        crossover.Crossover_Edge_Recombination(parents.get(i), parents.get(i+1));
+                        crossover.Crossover_Edge_Recombination(parents.get(i+1), parents.get(i));
                         break;
                 }
             } else {
-                next_generation.add(parent_1);
-                next_generation.add(parent_2);
+                next_generation.add(parents.get(i));
+                next_generation.add(parents.get(i+1));
             }
 
         }
@@ -111,31 +119,28 @@ public class GA {
 
         //int count = 0;
         //Mutate the next generation a bit
-        for (int i = elitism_size; i < pop_size; i++) {
+        for (int i = elitism_size; i < next_generation.size(); i++) {
 
-            if(Math.random() <= mut_rate) {
-                //count++;
-                switch (mut_type) {
-                    case 1:     //Insert
-                        mutation.Mutation_Insert(next_generation.get(i));
-                        break;
+            //count++;
+            switch (mut_type) {
+                case 1:     //Insert
+                    mutation.Mutation_Insert(next_generation.get(i), mut_rate);
+                    break;
 
-                    case 2:     //Swap
-                        mutation.Mutation_Swap(next_generation.get(i));
-                        break;
+                case 2:     //Swap
+                    mutation.Mutation_Swap(next_generation.get(i), mut_rate);
+                    break;
 
-                    case 3:     //Inversion
-                        mutation.Mutation_Inversion(next_generation.get(i));
-                        break;
+                case 3:     //Inversion
+                    mutation.Mutation_Inversion(next_generation.get(i), mut_rate);
+                    break;
 
-                    case 4:     //Scramble
-                        mutation.Mutation_Scramble(next_generation.get(i));
-                        break;
-                }
+                case 4:     //Scramble
+                    mutation.Mutation_Scramble(next_generation.get(i), mut_rate);
+                    break;
             }
 
         }
-
         //System.out.println(count);
 
         if (sel_type == 1) {
@@ -181,8 +186,6 @@ public class GA {
             //System.out.println(tour.TotalDistance());
             raw_fitness.add(tour.TotalDistance());
         }
-
-
     }
 
 

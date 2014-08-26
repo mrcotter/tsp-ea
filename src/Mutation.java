@@ -91,6 +91,7 @@ public class Mutation {
 
     //Mutation by using swap method
     public void Mutation_Swap(Individual individual, double mut_rate) {
+
         int size = individual.NumberOfNodes();
         ArrayList<Node> nodes = individual.getNodeList();
 
@@ -116,10 +117,60 @@ public class Mutation {
     //Mutation by using inversion
     public void Mutation_Inversion(Individual individual, double mut_rate) {
 
+        int size = individual.NumberOfNodes();
+        ArrayList<Node> nodes = individual.getNodeList();
+
+        for (Node node_1: nodes) {
+
+            if (Math.random() <= mut_rate) {
+
+                int index_1 = nodes.indexOf(node_1);
+                int index_2;
+
+                do {
+                    Random rand = new Random();
+                    index_2 = rand.nextInt(size);
+                } while (index_1 == index_2);
+
+                int lower_index = Math.min(index_1, index_2);
+                int bigger_index = Math.max(index_1, index_2);
+
+                //Do invert the substring among these two indices
+                while (lower_index <= bigger_index) {
+                    Collections.swap(nodes, lower_index, bigger_index);
+                    lower_index++;
+                    bigger_index--;
+                }
+
+            }
+        }
     }
 
     //Mutation by using Scramble
     public void Mutation_Scramble(Individual individual, double mut_rate) {
+
+        int size = individual.NumberOfNodes();
+        ArrayList<Node> nodes = individual.getNodeList();
+
+        for (Node node_1: nodes) {
+
+            if (Math.random() <= mut_rate) {
+
+                int index_1 = nodes.indexOf(node_1);
+                int index_2;
+
+                do {
+                    Random rand = new Random();
+                    index_2 = rand.nextInt(size);
+                } while (index_1 == index_2);
+
+                int lower_index = Math.min(index_1, index_2);
+                int bigger_index = Math.max(index_1, index_2);
+
+                //Shuffle the sublist ranged from lower index to bigger index
+                Collections.shuffle(nodes.subList(lower_index, bigger_index));
+            }
+        }
 
     }
 

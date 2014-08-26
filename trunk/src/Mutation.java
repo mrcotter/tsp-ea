@@ -12,7 +12,7 @@ public class Mutation {
 	
 	public Mutation() {}
 	
-	//Mutation by using insert method
+	/*//Mutation by using insert method
 	public void Mutation_Insert(Individual individual)
 	{
 		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
@@ -44,17 +44,87 @@ public class Mutation {
 		
 		if(RandomPos_1 > RandomPos_2)
 		{
-			//System.out.println("haha_2");
 			individual.AddANode(RandomPos_1+1, temp.get(RandomPos_2));
 			individual.DeleteANode(RandomPos_2);
 		}
 
         //System.out.println(individual.toString());
 			
-	}
+	}*/
+
+    //Mutation by using insert method
+    public void Mutation_Insert(Individual individual, double mut_rate) {
+
+        int size = individual.NumberOfNodes();
+        ArrayList<Node> nodes = individual.getNodeList();
+
+        for (Node node_1: nodes) {
+
+            if (Math.random() <= mut_rate) {
+
+                int index_1 = nodes.indexOf(node_1);
+                int index_2;
+
+                do {
+                    Random rand = new Random();
+                    index_2 = rand.nextInt(size);
+                } while (index_1 == index_2);
+
+                if ((index_1 + 1) == index_2 || (index_1 - 1) == index_2) {
+                    Collections.swap(nodes, index_1, index_2);
+                }
+
+                //Keep swapping the node with bigger index
+                while ((index_1 + 1) < index_2) {
+                    Collections.swap(nodes, index_2, index_2 - 1);
+                    index_2--;
+                }
+
+                while ((index_1 - 1) > index_2) {
+                    Collections.swap(nodes, index_2, index_2 + 1);
+                    index_2++;
+                }
+
+            }
+        }
+    }
+
+    //Mutation by using swap method
+    public void Mutation_Swap(Individual individual, double mut_rate) {
+        int size = individual.NumberOfNodes();
+        ArrayList<Node> nodes = individual.getNodeList();
+
+        for (Node node_1: nodes) {
+
+            if (Math.random() <= mut_rate) {
+
+                int index_1 = nodes.indexOf(node_1);
+                int index_2;
+
+                do {
+                    Random rand = new Random();
+                    index_2 = rand.nextInt(size);
+                } while (index_1 == index_2);
+
+                //Swap their positions
+                Collections.swap(nodes, index_1, index_2);
+            }
+        }
+
+    }
+
+    //Mutation by using inversion
+    public void Mutation_Inversion(Individual individual, double mut_rate) {
+
+    }
+
+    //Mutation by using Scramble
+    public void Mutation_Scramble(Individual individual, double mut_rate) {
+
+    }
+
 	
-	
-	//Mutation by using swap method
+	/*//Mutation by using swap method
 	public void Mutation_Swap(Individual individual)
 	{
 		ArrayList<Integer> Random_Int = new ArrayList<Integer>();
@@ -180,7 +250,7 @@ public class Mutation {
 				temp_num++;
 			}
 		}
-	}
+	}*/
 
 }
 

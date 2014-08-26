@@ -1,7 +1,7 @@
 # TSP configuration
 
 # TSPLIB File
-tsp=eil05.tsp
+tsp=eil51.tsp
 
 # Population Size: 10, 20, 50, 100
 pop_size=50
@@ -19,7 +19,7 @@ generations=10000
 mut_type=3
 
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
-cross_type=3
+cross_type=2
 
 # Selection Type: 1 - FPS, 2 - Tournament
 sel_type=2

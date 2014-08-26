@@ -51,8 +51,8 @@ public class GA {
                     break;
 
                 case 2:     //Tournament
-                    parent_1 = select.Selection_Tournament(tours, 5);
-                    parent_2 = select.Selection_Tournament(tours, 5);
+                    parent_1 = select.Selection_Tournament(tours, 2);
+                    parent_2 = select.Selection_Tournament(tours, 2);
                     break;
             }
 
@@ -76,7 +76,8 @@ public class GA {
                         break;
 
                     case 4:
-
+                        crossover.Crossover_Edge_Recombination(parent_1, parent_2);
+                        crossover.Crossover_Edge_Recombination(parent_2, parent_1);
                         break;
                 }
             } else {

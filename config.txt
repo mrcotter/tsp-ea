@@ -4,7 +4,7 @@
 tsp=eil51.tsp
 
 # Population Size: 10, 20, 50, 100
-pop_size=50
+pop_size=20
 
 # Mutation Rate [0,1]
 mut_rate=0.5
@@ -13,13 +13,13 @@ mut_rate=0.5
 cross_rate=0.5
 
 # Generations: 5000, 10000, 20000
-generations=10000
+generations=5000
 
 # Mutation Type: 1 - Insert, 2 - Swap, 3 - Inversion, 4 - Scramble
-mut_type=3
+mut_type=1
 
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
-cross_type=2
+cross_type=4
 
 # Selection Type: 1 - FPS, 2 - Tournament
 sel_type=2

@@ -276,7 +276,7 @@ public class Crossover {
     }
 
         // Edge Recombination Crossover
-        public void Edge_Recombination_Crossover(Individual parent_1, Individual parent_2) {
+        public void Crossover_Edge_Recombination(Individual parent_1, Individual parent_2) {
                 
         ArrayList<Node> tour_1 = parent_1.getNodeList();
         ArrayList<Node> tour_2 = parent_2.getNodeList();

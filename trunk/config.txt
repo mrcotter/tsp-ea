@@ -1,7 +1,7 @@
 # TSP configuration
 
 # TSPLIB File
-tsp=eil51.tsp
+tsp=eil05.tsp
 
 # Population Size: 10, 20, 50, 100
 pop_size=50

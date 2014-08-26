@@ -352,13 +352,13 @@ public class Crossover {
                             choices.add(i);
                         }
                     }
-                    s=choices.get((int)Math.random()*choices.size());
+                    s=choices.get((int) (Math.random() * choices.size()));
                 }
                 else
                 {
                     ArrayList<Node> temp=new ArrayList<Node>(tour_1);
                     temp.removeAll(child);
-                    s=temp.get((int)Math.random()*temp.size());
+                    s=temp.get((int) (Math.random() * temp.size()));
                 }
                 
         //Add to the offspring list

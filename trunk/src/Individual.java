@@ -9,7 +9,6 @@ public class Individual implements Comparable<Individual> {
 	
 	private ArrayList<Node> single_tour = new ArrayList<Node>();
 	private Map map;
-    private Individual tour;
 
     //Initialize a tour
 	public Individual(Map map)
@@ -27,9 +26,9 @@ public class Individual implements Comparable<Individual> {
 	public void CreateRandomTour()
 	{
         //System.out.println(map.GetNode(0).getID());
-		for (int i=0; i < map.NumberOfNodes(); i++)
+		for (int i = 0; i < map.NumberOfNodes(); i++)
 		{
-			single_tour.add(i, map.GetNode(i));
+			single_tour.add(map.GetNode(i));
 		}
 
         Collections.shuffle(single_tour);

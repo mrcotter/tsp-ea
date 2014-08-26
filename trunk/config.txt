@@ -16,10 +16,10 @@ cross_rate=0.5
 generations=10000
 
 # Mutation Type: 1 - Insert, 2 - Swap, 3 - Inversion, 4 - Scramble
-mut_type=2
+mut_type=4
 
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
-cross_type=2
+cross_type=3
 
 # Selection Type: 1 - FPS, 2 - Tournament
 sel_type=2

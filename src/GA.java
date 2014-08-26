@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * GA represents the process of evolving population algorithms
@@ -9,6 +10,10 @@ public class GA {
     private int pop_size, mut_type, cross_type, sel_type, elitism_size;
     private double mut_rate, cross_rate;
     private boolean elitism;
+
+    private ArrayList<Double> raw_fitness;
+    private ArrayList<Individual> ranked_tours;
+    private ArrayList<Integer> ranked_fitness;
 
     public GA(int pop_size, double mut_rate, int mut_type,
               double cross_rate, int cross_type, int sel_type, boolean elitism, int elitism_size) {
@@ -31,6 +36,20 @@ public class GA {
         Mutation mutation = new Mutation();
         ArrayList<Individual> next_generation = new ArrayList<Individual>(pop_size);
 
+
+        if (sel_type == 1) {
+            //Calculate raw fitness of a population
+            getRawFitness(tours);
+        }
+
+        if (sel_type == 2) {
+            //Calculate ranked fitness of a population
+            getRanked_fitness(tours);
+        }
+
+        //System.out.println(raw_fitness.get(0).toString());
+        //System.out.println(ranked_fitness.get(0).toString());
+
         if (!elitism) {
             elitism_size = 0;
         }
@@ -46,13 +65,13 @@ public class GA {
             //Select parents for the mating pool
             switch (sel_type) {
                 case 1:     //FPS
-                    parent_1 = select.Selection_FPS(tours);
-                    parent_2 = select.Selection_FPS(tours);
+                    parent_1 = select.Selection_FPS(tours, raw_fitness);
+                    parent_2 = select.Selection_FPS(tours, raw_fitness);
                     break;
 
                 case 2:     //Tournament
-                    parent_1 = select.Selection_Tournament(tours, 2);
-                    parent_2 = select.Selection_Tournament(tours, 2);
+                    parent_1 = select.Selection_Tournament(tours, 2, ranked_fitness, ranked_tours);
+                    parent_2 = select.Selection_Tournament(tours, 2, ranked_fitness, ranked_tours);
                     break;
             }
 
@@ -119,8 +138,50 @@ public class GA {
 
         //System.out.println(count);
 
+        if (sel_type == 1) {
+            raw_fitness.clear();
+        }
+
+        if (sel_type == 2) {
+            ranked_fitness.clear();
+            ranked_tours.clear();
+        }
+
         //Return next_generation;
         return next_generation;
+
+    }
+
+    private void getRanked_fitness(ArrayList<Individual> tours) {
+
+        int size = tours.size();
+        ranked_tours = new ArrayList<Individual>(tours);
+        ranked_fitness = new ArrayList<Integer>(size);
+
+        //Sort the list based on total distance
+        Collections.sort(ranked_tours);
+
+        /*for (Individual tour: ranked_tours) {
+            System.out.println(tour.toString() + "    " + tour.TotalDistance());
+        }*/
+
+        for (int i = 1; i <= size; i++) {
+            ranked_fitness.add(i);
+        }
+
+        //System.out.println(ranked_fitness.toString());
+    }
+
+    private void getRawFitness(ArrayList<Individual> tours) {
+
+        raw_fitness = new ArrayList<Double>(tours.size());
+
+        for (Individual tour: tours) {
+            //System.out.println(tour.toString());
+            //System.out.println(tour.TotalDistance());
+            raw_fitness.add(tour.TotalDistance());
+        }
+
 
     }
 

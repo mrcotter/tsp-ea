@@ -7,16 +7,10 @@ import java.util.Collections;
 
 public class Selection {
 
-    private ArrayList<Double> raw_fitness;
-    ArrayList<Individual> ranked_tours;
-    private ArrayList<Integer> ranked_fitness;
-
     public Selection() {}
 
     //Fitness-Proportionate Selection (RWS)
-    public Individual Selection_FPS(ArrayList<Individual> tours) {
-
-        getRawFitness(tours);    //Move to GA later
+    public Individual Selection_FPS(ArrayList<Individual> tours, ArrayList<Double> raw_fitness) {
 
         double sum_of_fitness = 0.0;
         double sum_of_probability = 0.0;
@@ -41,11 +35,15 @@ public class Selection {
     }
 
     //Tournament Selection
-    public Individual Selection_Tournament(ArrayList<Individual> tours, int tournament_size) {
+    public Individual Selection_Tournament(ArrayList<Individual> tours, int tournament_size,
+                                           ArrayList<Integer> ranked_fitness, ArrayList<Individual> ranked_tours) {
 
         ArrayList<Individual> tournament_pool = new ArrayList<Individual>(tournament_size);
 
-        int ranked_sum = getRanked_fitness(tours);
+        int ranked_sum = 0;
+        for (Integer fitness : ranked_fitness) {
+            ranked_sum += fitness;
+        }
         //System.out.println(ranked_tours.get(0).toString());
 
         //Pick k members based on their ranks
@@ -90,41 +88,5 @@ public class Selection {
         return elites;
     }
 
-
-    //Move to GA later
-    //Calculate the fitness for all tours in given list containing tours
-    private void getRawFitness(ArrayList<Individual> tours) {
-        raw_fitness = new ArrayList<Double>(tours.size());
-
-        for (Individual tour: tours) {
-            //System.out.println(tour.toString());
-            //System.out.println(tour.TotalDistance());
-            raw_fitness.add(tour.TotalDistance());
-        }
-    }
-
-    //Calculate the ranks for given tours
-    private int getRanked_fitness(ArrayList<Individual> tours) {
-
-        int size = tours.size();
-        ranked_tours = new ArrayList<Individual>(tours);
-        ranked_fitness = new ArrayList<Integer>(size);
-
-        //Sort the list based on total distance
-        Collections.sort(ranked_tours);
-
-        /*for (Individual tour: ranked_tours) {
-            System.out.println(tour.toString() + "    " + tour.TotalDistance());
-        }*/
-
-        int ranked_sum = 0;
-        for (int i = 1; i <= size; i++) {
-            ranked_sum += i;
-            ranked_fitness.add(i);
-        }
-
-        //System.out.println(ranked_fitness.toString());
-        return ranked_sum;
-    }
 
 }

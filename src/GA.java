@@ -73,8 +73,8 @@ public class GA {
                     break;
 
                 case 2:     //Tournament
-                    parent_1 = select.Selection_Tournament(tours, 2, ranked_fitness, ranked_tours);
-                    parent_2 = select.Selection_Tournament(tours, 2, ranked_fitness, ranked_tours);
+                    parent_1 = select.Selection_Tournament(ranked_tours, 2, ranked_fitness);
+                    parent_2 = select.Selection_Tournament(ranked_tours, 2, ranked_fitness);
                     parents.add(parent_1);
                     parents.add(parent_2);
                     break;
@@ -174,7 +174,11 @@ public class GA {
             ranked_fitness.add(i);
         }
 
-        //System.out.println(ranked_fitness.toString());
+        /*System.out.println(ranked_fitness.toString());
+        for (Individual tour: ranked_tours) {
+            System.out.println(tour.TotalDistance());
+        }*/
+
     }
 
     private void getRawFitness(ArrayList<Individual> tours) {

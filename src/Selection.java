@@ -23,8 +23,8 @@ public class Selection {
 
         for (int i = 0; i < tours.size(); i++) {
 
-            if (decision >= sum_of_probability && decision <= (sum_of_probability + raw_fitness.get(i))) {
-                //System.out.println(tours.get(i).toString());
+            if ((decision >= sum_of_probability) && (decision <= (sum_of_probability + raw_fitness.get(i)))) {
+                //System.out.println(decision + "   " + sum_of_probability + "   " + (sum_of_probability + raw_fitness.get(i)));
                 return tours.get(i);
             }
 
@@ -35,27 +35,29 @@ public class Selection {
     }
 
     //Tournament Selection
-    public Individual Selection_Tournament(ArrayList<Individual> tours, int tournament_size,
-                                           ArrayList<Integer> ranked_fitness, ArrayList<Individual> ranked_tours) {
+    public Individual Selection_Tournament(ArrayList<Individual> ranked_tours, int tournament_size,
+                                           ArrayList<Integer> ranked_fitness) {
 
         ArrayList<Individual> tournament_pool = new ArrayList<Individual>(tournament_size);
 
         int ranked_sum = 0;
         for (Integer fitness : ranked_fitness) {
+            //System.out.println(ranked_sum);
             ranked_sum += fitness;
         }
         //System.out.println(ranked_tours.get(0).toString());
 
-        //Pick k members based on their ranks
+        //Pick i members based on their ranks
         for (int i = 0; i < tournament_size; i++) {
 
             int sum_of_probability = 0;
             int decision = (int) (Math.random() * ranked_sum);
             //System.out.println(decision);
-            for (int j = 0; j < tours.size(); j++) {
+            for (int j = 0; j < ranked_tours.size(); j++) {
 
                 //System.out.println(sum_of_probability);
-                if (decision >= sum_of_probability && decision <= (sum_of_probability + ranked_fitness.get(j))) {
+                if ((decision >= sum_of_probability) && (decision <= (sum_of_probability + ranked_fitness.get(j)))) {
+                    System.out.println(decision + "   " + sum_of_probability + "   " + (sum_of_probability + ranked_fitness.get(i)));
                     tournament_pool.add(ranked_tours.get(j));
                 }
 
@@ -68,6 +70,9 @@ public class Selection {
         Collections.sort(tournament_pool);
 
         /*for (Individual tour: tournament_pool) {
+            System.out.println(tour.toString() + "    " + tour.TotalDistance());
+        }*/
+        /*for (Individual tour: ranked_tours) {
             System.out.println(tour.toString() + "    " + tour.TotalDistance());
         }*/
 

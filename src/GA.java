@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * GA represents the process of evolving population algorithms
@@ -89,7 +90,8 @@ public class GA {
         for (int i = 0; i < parents.size() - 1; i++) {
 
             //Crossover parents
-            if (Math.random() <= cross_rate) {
+            Random rand = new Random();
+            if (rand.nextDouble() <= cross_rate) {
 
                 switch (cross_type) {
                     case 1:     //Order
@@ -204,7 +206,8 @@ public class GA {
 
         /*for (Individual tour: ranked_tours) {
             System.out.println(tour.toString() + "    " + tour.TotalDistance());
-        }*/
+        }
+        System.out.println();*/
 
         for (int i = 1; i <= ranked_tours.size(); i++) {
             ranked_fitness.add(i);

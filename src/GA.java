@@ -76,7 +76,7 @@ public class GA {
                 break;
 
             case 2:     //Tournament
-                p_select.Selection_Tournament(p_ranked_tours, 2, p_ranked_fitness, pop_size);
+                p_select.Selection_Tournament(p_ranked_tours, 5, p_ranked_fitness, pop_size);
                 break;
         }
 
@@ -85,7 +85,8 @@ public class GA {
 
         //System.out.println(parents.size());
 
-        for (int i = 0; i < parents.size() - 1; i++) {
+        //Crossover
+        for (int i = 0; i < parents.size() - 1; i = i + 2) {
 
             //Crossover parents
             Random rand = new Random();
@@ -104,7 +105,7 @@ public class GA {
                         crossover.Crossover_Cycle(parents.get(i), parents.get(i+1));
                         break;
 
-                    case 4:
+                    case 4:     //Edge Recombination
                         crossover.Crossover_Edge_Recombination(parents.get(i), parents.get(i+1));
                         crossover.Crossover_Edge_Recombination(parents.get(i+1), parents.get(i));
                         break;
@@ -118,6 +119,7 @@ public class GA {
 
         children.addAll(crossover.getOffsprings());
         crossover.clear();
+
         //System.out.println(children.size());
         /*for (Individual tour: children) {
             System.out.println(tour.toString() + "    " + tour.TotalDistance());
@@ -172,7 +174,7 @@ public class GA {
                 break;
 
             case 2:     //Tournament
-                c_select.Selection_Tournament(c_ranked_tours, 2, c_ranked_fitness, pop_size);
+                c_select.Selection_Tournament(c_ranked_tours, 5, c_ranked_fitness, pop_size);
                 break;
         }
 

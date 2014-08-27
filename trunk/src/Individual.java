@@ -116,7 +116,7 @@ public class Individual implements Comparable<Individual> {
 
     @Override
     public int compareTo(Individual tour) {
-        if (this.TotalDistance() == tour.TotalDistance()) {
+        if (Math.abs(this.TotalDistance() - tour.TotalDistance()) <= 0.000001) {
             return 0;
         } else {
             return this.TotalDistance() > tour.TotalDistance() ? 1 : -1;

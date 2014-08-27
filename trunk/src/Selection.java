@@ -7,36 +7,39 @@ import java.util.Collections;
 
 public class Selection {
 
+    private ArrayList<Individual> selections = new ArrayList<Individual>();
+
     public Selection() {}
 
     //Fitness-Proportionate Selection (RWS)
-    public Individual Selection_FPS(ArrayList<Individual> tours, ArrayList<Double> raw_fitness) {
+    public void Selection_FPS(ArrayList<Individual> tours, ArrayList<Double> raw_fitness, int pool_size) {
 
         double sum_of_fitness = 0.0;
-        double sum_of_probability = 0.0;
-
         for (Double fitness: raw_fitness) {
             sum_of_fitness += fitness;
         }
 
-        double decision = Math.random() * sum_of_fitness;
+        for (int i = 0; i < pool_size; i++) {
 
-        for (int i = 0; i < tours.size(); i++) {
+            double sum_of_probability = 0.0;
+            double decision = Math.random() * sum_of_fitness;
 
-            if ((decision >= sum_of_probability) && (decision <= (sum_of_probability + raw_fitness.get(i)))) {
-                //System.out.println(decision + "   " + sum_of_probability + "   " + (sum_of_probability + raw_fitness.get(i)));
-                return tours.get(i);
+            for (int j = 0; j < tours.size(); j++) {
+
+                if ((decision >= sum_of_probability) && (decision <= (sum_of_probability + raw_fitness.get(j)))) {
+                    //System.out.println(decision + "   " + sum_of_probability + "   " + (sum_of_probability + raw_fitness.get(i)));
+                    selections.add(tours.get(j));
+                }
+
+                sum_of_probability += raw_fitness.get(j);
             }
-
-            sum_of_probability += raw_fitness.get(i);
         }
 
-        return null;
     }
 
     //Tournament Selection
-    public Individual Selection_Tournament(ArrayList<Individual> ranked_tours, int tournament_size,
-                                           ArrayList<Integer> ranked_fitness) {
+    public void Selection_Tournament(ArrayList<Individual> ranked_tours, int tournament_size,
+                                           ArrayList<Integer> ranked_fitness, int pool_size) {
 
         ArrayList<Individual> tournament_pool = new ArrayList<Individual>(tournament_size);
 
@@ -47,36 +50,41 @@ public class Selection {
         }
         //System.out.println(ranked_tours.get(0).toString());
 
-        //Pick i members based on their ranks
-        for (int i = 0; i < tournament_size; i++) {
+        for (int k = 0; k < pool_size; k++) {
 
-            int sum_of_probability = 0;
-            int decision = (int) (Math.random() * ranked_sum);
-            //System.out.println(decision);
-            for (int j = 0; j < ranked_tours.size(); j++) {
+            //Pick i members based on their ranks
+            for (int i = 0; i < tournament_size; i++) {
 
-                //System.out.println(sum_of_probability);
-                if ((decision >= sum_of_probability) && (decision <= (sum_of_probability + ranked_fitness.get(j)))) {
-                    //System.out.println(decision + "   " + sum_of_probability + "   " + (sum_of_probability + ranked_fitness.get(i)));
-                    tournament_pool.add(ranked_tours.get(j));
+                int sum_of_probability = 0;
+                int decision = (int) (Math.random() * ranked_sum);
+                //System.out.println(decision);
+                for (int j = 0; j < ranked_tours.size(); j++) {
+
+                    //System.out.println(sum_of_probability);
+                    if ((decision >= sum_of_probability) && (decision <= (sum_of_probability + ranked_fitness.get(j)))) {
+                        //System.out.println(decision + "   " + sum_of_probability + "   " + (sum_of_probability + ranked_fitness.get(i)));
+                        tournament_pool.add(ranked_tours.get(j));
+                    }
+
+                    sum_of_probability += ranked_fitness.get(j);
                 }
 
-                sum_of_probability += ranked_fitness.get(j);
             }
 
+            //Select the best of them
+            Collections.sort(tournament_pool);
+
+            /*for (Individual tour: tournament_pool) {
+                System.out.println(tour.toString() + "    " + tour.TotalDistance());
+            }*/
+            /*for (Individual tour: ranked_tours) {
+                System.out.println(tour.toString() + "    " + tour.TotalDistance());
+            }*/
+
+            selections.add(tournament_pool.get(0));
         }
 
-        //Select the best of them
-        Collections.sort(tournament_pool);
 
-        /*for (Individual tour: tournament_pool) {
-            System.out.println(tour.toString() + "    " + tour.TotalDistance());
-        }*/
-        /*for (Individual tour: ranked_tours) {
-            System.out.println(tour.toString() + "    " + tour.TotalDistance());
-        }*/
-
-        return tournament_pool.get(0);
     }
 
     public ArrayList<Individual> Selection_Elitism(ArrayList<Individual> tours, int num) {
@@ -93,5 +101,13 @@ public class Selection {
         return elites;
     }
 
+
+    public ArrayList<Individual> getSelections() {
+        return selections;
+    }
+
+    public void clear() {
+        selections.clear();
+    }
 
 }

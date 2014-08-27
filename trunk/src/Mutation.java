@@ -20,14 +20,15 @@ public class Mutation {
 
 		for (Node node_1: nodes) {
 
-			if (Math.random() <= mut_rate) {
+            Random rand = new Random();
+			if (rand.nextDouble() <= mut_rate) {
 
 				int index_1 = nodes.indexOf(node_1);
 				int index_2;
 
 				do {
-					Random rand = new Random();
-					index_2 = rand.nextInt(size);
+					Random rand_index = new Random();
+					index_2 = rand_index.nextInt(size);
 				} while (index_1 == index_2);
 
 				if ((index_1 + 1) == index_2 || (index_1 - 1) == index_2) {
@@ -57,14 +58,15 @@ public class Mutation {
 
 		for (Node node_1: nodes) {
 
-			if (Math.random() <= mut_rate) {
+            Random rand = new Random();
+            if (rand.nextDouble() <= mut_rate) {
 
 				int index_1 = nodes.indexOf(node_1);
 				int index_2;
 
 				do {
-					Random rand = new Random();
-					index_2 = rand.nextInt(size);
+					Random rand_index = new Random();
+					index_2 = rand_index.nextInt(size);
 				} while (index_1 == index_2);
 
 				//Swap their positions
@@ -82,14 +84,15 @@ public class Mutation {
 
 		for (Node node_1: nodes) {
 
-			if (Math.random() <= mut_rate) {
+            Random rand = new Random();
+            if (rand.nextDouble() <= mut_rate) {
 
 				int index_1 = nodes.indexOf(node_1);
 				int index_2;
 
 				do {
-					Random rand = new Random();
-					index_2 = rand.nextInt(size);
+					Random rand_index = new Random();
+					index_2 = rand_index.nextInt(size);
 				} while (index_1 == index_2);
 
 				int lower_index = Math.min(index_1, index_2);
@@ -115,14 +118,15 @@ public class Mutation {
 
 		for (Node node_1: nodes) {
 
-			if (Math.random() <= mut_rate) {
+            Random rand = new Random();
+            if (rand.nextDouble() <= mut_rate) {
 
 				int index_1 = nodes.indexOf(node_1);
 				int index_2;
 
 				do {
-					Random rand = new Random();
-					index_2 = rand.nextInt(size);
+					Random rand_index = new Random();
+					index_2 = rand_index.nextInt(size);
 				} while (index_1 == index_2);
 
 				int lower_index = Math.min(index_1, index_2);

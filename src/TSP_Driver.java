@@ -93,8 +93,8 @@ public class TSP_Driver {
         long start = System.currentTimeMillis();
 
         //Start GA
-        GA ga = new GA(pop_size, mut_rate, mut_type,
-                        cross_rate, cross_type, sel_type, elitism, elitism_size);
+        GA ga = new GA(mut_rate, mut_type, cross_rate, cross_type,
+                        sel_type, elitism, elitism_size);
 
         for (int i = 0; i < generations; i++) {
             tours = ga.runGA(tours);

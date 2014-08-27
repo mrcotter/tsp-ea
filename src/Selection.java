@@ -57,7 +57,7 @@ public class Selection {
 
                 //System.out.println(sum_of_probability);
                 if ((decision >= sum_of_probability) && (decision <= (sum_of_probability + ranked_fitness.get(j)))) {
-                    System.out.println(decision + "   " + sum_of_probability + "   " + (sum_of_probability + ranked_fitness.get(i)));
+                    //System.out.println(decision + "   " + sum_of_probability + "   " + (sum_of_probability + ranked_fitness.get(i)));
                     tournament_pool.add(ranked_tours.get(j));
                 }
 

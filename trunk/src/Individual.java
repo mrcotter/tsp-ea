@@ -81,12 +81,13 @@ public class Individual implements Comparable<Individual> {
 		double TotalDistance = 0.0;
 		Node Node_Start;
 		Node Node_End;
-		
-		for (int i = 0; i < single_tour.size(); i++)
+
+		int size = single_tour.size();
+		for (int i = 0; i < size; i++)
 		{
 			Node_Start = GetANode(i);
 			
-			if(i+1 < single_tour.size())
+			if((i + 1) < size)
 			{
 				Node_End = GetANode(i+1);
 			}

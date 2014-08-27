@@ -21,9 +21,12 @@ public class Crossover {
 	    int size = parent_1.NumberOfNodes();
 
 	    Random rand = new Random();
+        int number1, number2;
 	    //Choose two arbitrary parts for start and end from parents
-	    int number1 = rand.nextInt(size);
-	    int number2 = rand.nextInt(size);
+	    do {
+            number1 = rand.nextInt(size);
+            number2 = rand.nextInt(size);
+        } while (number1 == number2);
 
 	    int start = Math.min(number1, number2);
 	    int end = Math.max(number1, number2);
@@ -96,9 +99,12 @@ public class Crossover {
         int size = parent_1.NumberOfNodes();
 
         Random rand = new Random();
+        int number1, number2;
         //Choose two arbitrary parts for start and end from parents
-        int number1 = rand.nextInt(size);
-        int number2 = rand.nextInt(size);
+        do {
+            number1 = rand.nextInt(size);
+            number2 = rand.nextInt(size);
+        } while (number1 == number2);
 
         int start = Math.min(number1, number2);
         int end = Math.max(number1, number2);

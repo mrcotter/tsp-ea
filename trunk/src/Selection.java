@@ -23,8 +23,10 @@ public class Selection {
         for (int i = 0; i < pool_size; i++) {
 
             double sum_of_probability = 0.0;
+
             Random rand = new Random();
             double decision = rand.nextDouble() * sum_of_fitness;
+
 
             for (int j = 0; j < tours.size(); j++) {
 

@@ -26,19 +26,20 @@ public class GA {
     public ArrayList<Individual> runGA(ArrayList<Individual> tours) {
 
         //Initialisation
-        Selection select = new Selection();
+        Selection p_select = new Selection();
+        Selection c_select = new Selection();
         Crossover crossover = new Crossover();
         Mutation mutation = new Mutation();
 
         int pop_size = tours.size();
 
         ArrayList<Individual> next_generation = new ArrayList<Individual>();
-        ArrayList<Individual> parents = new ArrayList<Individual>(pop_size);
+        ArrayList<Individual> parents = new ArrayList<Individual>();
         ArrayList<Individual> children = new ArrayList<Individual>();
 
-        ArrayList<Double> p_raw_fitness = new ArrayList<Double>(pop_size);
+        ArrayList<Double> p_raw_fitness = new ArrayList<Double>();
         ArrayList<Individual> p_ranked_tours = null;
-        ArrayList<Integer> p_ranked_fitness = new ArrayList<Integer>(pop_size);
+        ArrayList<Integer> p_ranked_fitness = new ArrayList<Integer>();
 
         ArrayList<Double> c_raw_fitness = new ArrayList<Double>();
         ArrayList<Individual> c_ranked_tours = null;
@@ -63,30 +64,23 @@ public class GA {
         }
 
         if (elitism) {
-            next_generation.addAll(select.Selection_Elitism(tours, elitism_size));
+            next_generation.addAll(p_select.Selection_Elitism(tours, elitism_size));
         }
 
 
-        Individual parent_1 = null, parent_2 = null;
-        for (int i = elitism_size; i < pop_size/2; i++) {
+        //Select parents for the mating pool
+        switch (sel_type) {
+            case 1:     //FPS
+                p_select.Selection_FPS(tours, p_raw_fitness, pop_size);
+                break;
 
-            //Select parents for the mating pool
-            switch (sel_type) {
-                case 1:     //FPS
-                    parent_1 = select.Selection_FPS(tours, p_raw_fitness);
-                    parent_2 = select.Selection_FPS(tours, p_raw_fitness);
-                    parents.add(parent_1);
-                    parents.add(parent_2);
-                    break;
-
-                case 2:     //Tournament
-                    parent_1 = select.Selection_Tournament(p_ranked_tours, 2, p_ranked_fitness);
-                    parent_2 = select.Selection_Tournament(p_ranked_tours, 2, p_ranked_fitness);
-                    parents.add(parent_1);
-                    parents.add(parent_2);
-                    break;
-            }
+            case 2:     //Tournament
+                p_select.Selection_Tournament(p_ranked_tours, 2, p_ranked_fitness, pop_size);
+                break;
         }
+
+        parents.addAll(p_select.getSelections());
+        p_select.clear();
 
         //Shuffle the mating pool
         Collections.shuffle(parents);
@@ -162,27 +156,21 @@ public class GA {
             //System.out.println(c_ranked_fitness);
         }
 
+
         //Select children to the next generation
-        Individual child_1 = null, child_2 = null;
-        for (int i = 0; i < pop_size/2; i++) {
+        switch (sel_type) {
+            case 1:     //FPS
+                c_select.Selection_FPS(children, c_raw_fitness, pop_size);
+                break;
 
-            //Select parents
-            switch (sel_type) {
-                case 1:     //FPS
-                    child_1 = select.Selection_FPS(children, c_raw_fitness);
-                    child_2 = select.Selection_FPS(children, c_raw_fitness);
-                    next_generation.add(child_1);
-                    next_generation.add(child_2);
-                    break;
-
-                case 2:     //Tournament
-                    child_1 = select.Selection_Tournament(c_ranked_tours, 2, c_ranked_fitness);
-                    child_2 = select.Selection_Tournament(c_ranked_tours, 2, c_ranked_fitness);
-                    next_generation.add(child_1);
-                    next_generation.add(child_2);
-                    break;
-            }
+            case 2:     //Tournament
+                c_select.Selection_Tournament(c_ranked_tours, 2, c_ranked_fitness, pop_size);
+                break;
         }
+
+        next_generation.addAll(c_select.getSelections());
+        c_select.clear();
+        //System.out.println(next_generation.size());
 
 
         if (sel_type == 1) {

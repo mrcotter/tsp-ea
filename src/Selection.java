@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 /**
  * Selection represents fitness based competition to select parents and offsprings
@@ -22,7 +23,8 @@ public class Selection {
         for (int i = 0; i < pool_size; i++) {
 
             double sum_of_probability = 0.0;
-            double decision = Math.random() * sum_of_fitness;
+            Random rand = new Random();
+            double decision = rand.nextDouble() * sum_of_fitness;
 
             for (int j = 0; j < tours.size(); j++) {
 
@@ -56,7 +58,8 @@ public class Selection {
             for (int i = 0; i < tournament_size; i++) {
 
                 int sum_of_probability = 0;
-                int decision = (int) (Math.random() * ranked_sum);
+                Random rand = new Random();
+                int decision = rand.nextInt(ranked_sum);
                 //System.out.println(decision);
                 for (int j = 0; j < ranked_tours.size(); j++) {
 

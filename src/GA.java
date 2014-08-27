@@ -83,8 +83,6 @@ public class GA {
         parents.addAll(p_select.getSelections());
         p_select.clear();
 
-        //Shuffle the mating pool
-        Collections.shuffle(parents);
         //System.out.println(parents.size());
 
         for (int i = 0; i < parents.size() - 1; i++) {
@@ -121,6 +119,10 @@ public class GA {
         children.addAll(crossover.getOffsprings());
         crossover.clear();
         //System.out.println(children.size());
+        /*for (Individual tour: children) {
+            System.out.println(tour.toString() + "    " + tour.TotalDistance());
+        }
+        System.out.println();*/
 
         //int count = 0;
         //Mutate the next generation a bit
@@ -146,6 +148,10 @@ public class GA {
             }
         }
         //System.out.println(count);
+        /*for (Individual tour: children) {
+            System.out.println(tour.toString() + "    " + tour.TotalDistance());
+        }
+        System.out.println();*/
 
         //Get children's fitness
         if (sel_type == 1) {
@@ -197,6 +203,7 @@ public class GA {
 
     }
 
+
     private ArrayList<Individual> getRanked_fitness(ArrayList<Individual> tours, ArrayList<Integer> ranked_fitness) {
 
         ArrayList<Individual> ranked_tours = new ArrayList<Individual>(tours);
@@ -209,13 +216,22 @@ public class GA {
         }
         System.out.println();*/
 
-        for (int i = 1; i <= ranked_tours.size(); i++) {
-            ranked_fitness.add(i);
+        Integer rank = 1;
+        ranked_fitness.add(rank);
+        for (int i = 1; i < ranked_tours.size(); i++) {
+
+            if (Math.abs(ranked_tours.get(i).TotalDistance() - ranked_tours.get(i-1).TotalDistance()) <= 0.000001) {
+                ranked_fitness.add(i, rank);
+            } else {
+                rank++;
+                ranked_fitness.add(i, rank);
+            }
         }
+
 
         /*System.out.println(ranked_fitness.toString());
         for (Individual tour: ranked_tours) {
-            System.out.println(tour.TotalDistance());
+            System.out.println(tour.toString() + "    " + tour.TotalDistance());
         }*/
 
         return ranked_tours;

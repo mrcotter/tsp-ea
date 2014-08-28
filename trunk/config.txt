@@ -7,7 +7,7 @@ tsp=eil51.tsp
 pop_size=20
 
 # Mutation Rate [0,1]
-mut_rate=0.08
+mut_rate=0.4
 
 # Crossover Rate [0,1]
 cross_rate=0.5
@@ -19,7 +19,7 @@ generations=10000
 mut_type=3
 
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
-cross_type=3
+cross_type=1
 
 # Selection Type: 1 - FPS, 2 - Tournament
 sel_type=2

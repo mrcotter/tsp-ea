@@ -23,11 +23,11 @@ public class Mutation {
             Random rand = new Random();
 			if (rand.nextDouble() <= mut_rate) {
 
-				int index_1 = nodes.indexOf(node_1);
-				int index_2;
+				int index_1, index_2;
 
 				do {
 					Random rand_index = new Random();
+                    index_1 = rand_index.nextInt(size);
 					index_2 = rand_index.nextInt(size);
 				} while (index_1 == index_2);
 
@@ -61,11 +61,11 @@ public class Mutation {
             Random rand = new Random();
             if (rand.nextDouble() <= mut_rate) {
 
-				int index_1 = nodes.indexOf(node_1);
-				int index_2;
+                int index_1, index_2;
 
-				do {
-					Random rand_index = new Random();
+                do {
+                    Random rand_index = new Random();
+                    index_1 = rand_index.nextInt(size);
 					index_2 = rand_index.nextInt(size);
 				} while (index_1 == index_2);
 
@@ -87,11 +87,11 @@ public class Mutation {
             Random rand = new Random();
             if (rand.nextDouble() <= mut_rate) {
 
-				int index_1 = nodes.indexOf(node_1);
-				int index_2;
+                int index_1, index_2;
 
-				do {
-					Random rand_index = new Random();
+                do {
+                    Random rand_index = new Random();
+                    index_1 = rand_index.nextInt(size);
 					index_2 = rand_index.nextInt(size);
 				} while (index_1 == index_2);
 
@@ -121,11 +121,11 @@ public class Mutation {
             Random rand = new Random();
             if (rand.nextDouble() <= mut_rate) {
 
-				int index_1 = nodes.indexOf(node_1);
-				int index_2;
+                int index_1, index_2;
 
-				do {
-					Random rand_index = new Random();
+                do {
+                    Random rand_index = new Random();
+                    index_1 = rand_index.nextInt(size);
 					index_2 = rand_index.nextInt(size);
 				} while (index_1 == index_2);
 

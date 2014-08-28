@@ -46,6 +46,7 @@ public class GA {
         ArrayList<Individual> c_ranked_tours = null;
         ArrayList<Integer> c_ranked_fitness = new ArrayList<Integer>();
 
+        Collections.shuffle(tours);
 
         if (sel_type == 1) {
             //Calculate raw fitness of a population
@@ -76,7 +77,7 @@ public class GA {
                 break;
 
             case 2:     //Tournament
-                p_select.Selection_Tournament(p_ranked_tours, 5, p_ranked_fitness, pop_size);
+                p_select.Selection_Tournament(p_ranked_tours, 2, p_ranked_fitness, pop_size);
                 break;
         }
 
@@ -155,7 +156,7 @@ public class GA {
         }
         System.out.println();*/
 
-        //Get children's fitness
+        /*//Get children's fitness
         if (sel_type == 1) {
             getRawFitness(children, c_raw_fitness);
         }
@@ -180,8 +181,9 @@ public class GA {
 
         next_generation.addAll(c_select.getSelections());
         c_select.clear();
-        //System.out.println(next_generation.size());
+        //System.out.println(next_generation.size());*/
 
+        next_generation.addAll(children);
 
         if (sel_type == 1) {
             p_raw_fitness.clear();

@@ -96,13 +96,24 @@ public class TSP_Driver {
         GA ga = new GA(mut_rate, mut_type, cross_rate, cross_type,
                         sel_type, elitism, elitism_size);
 
-        for (int i = 0; i < generations; i++) {
+
+        double best_result, temp;
+        tours = ga.runGA(tours);
+        Collections.sort(tours);
+        best_result = tours.get(0).TotalDistance();
+
+        for (int i = 1; i < generations; i++) {
+
             tours = ga.runGA(tours);
+            Collections.sort(tours);
+            temp = tours.get(0).TotalDistance();
+
+            if (temp < best_result) {
+                best_result = temp;
+            }
         }
 
-        Collections.sort(tours);
-
-        System.out.println("Final Distance: " + tours.get(0).TotalDistance());
+        System.out.println("Final Distance: " + best_result);
 
 
         long end = System.currentTimeMillis();

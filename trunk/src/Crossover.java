@@ -378,7 +378,7 @@ public class Crossover {
             edgeMap = removeFromEdgeMap(edgeMap, current_city.getID());
         }
 
-
+        offsprings.add(new Individual(childCity));
 
     }
 
@@ -513,10 +513,3 @@ public class Crossover {
     }
 
 }
-
-
-
-
-
-
-

@@ -3,8 +3,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 
 public class TSP_Driver {
     public static void main(String[] args) throws Exception {
@@ -87,64 +85,27 @@ public class TSP_Driver {
         Map map = tsp.getMap();
         //map.printNodes();
         Population pop = new Population(pop_size, map);
-        ArrayList<Individual> tours = pop.GetAllTours();
-
 
         long start = System.currentTimeMillis();
 
         //Start GA
-        GA ga = new GA(mut_rate, mut_type, cross_rate, cross_type,
-                        sel_type, elitism, elitism_size);
+        GA ga = new GA(pop_size, mut_rate, mut_type,
+                        cross_rate, cross_type, sel_type, elitism, elitism_size);
+        
+        pop = ga.runGA(pop);
 
-
-        double best_result, temp;
-        tours = ga.runGA(tours);
-        Collections.sort(tours);
-        best_result = tours.get(0).TotalDistance();
-
-        for (int i = 1; i < generations; i++) {
-
-            tours = ga.runGA(tours);
-            Collections.sort(tours);
-            temp = tours.get(0).TotalDistance();
-
-            if (temp < best_result) {
-                best_result = temp;
-            }
+        for (int i = 0; i < generations; i++) {
+            pop = ga.runGA(pop);
         }
 
-        System.out.println("Final Distance: " + best_result);
-
+        System.out.println("Final Path: " + pop.FindShortest());
+     
+        System.out.println("\nFinal Distance: " + pop.FindShortest().TotalDistance());
 
         long end = System.currentTimeMillis();
         //Calculate program running time
         NumberFormat formatter = new DecimalFormat("#0.00000");
-        System.out.println("\nExecution time is " + formatter.format((end - start) / 1000d) + " seconds");
-
-
-        //--------------------- Testing -------------------
-        //Individual tour = new Individual(map);
-        //tour.CreateRandomTour();
-        //System.out.println(tour.toString());
-        //System.out.println(tour.TotalDistance());
-
-        //Initialize population
-        //Population pop = new Population(50, map);
-        //System.out.println(pop.toString());
-
-        //Mutation mu = new Mutation(tour);
-        //mu.Mutation_Insert();
-        //mu.Mutation_Swap();
-
-        //Crossover cross = new Crossover();
-        //cross.Crossover_Order(pop.GetASingleTour(0), pop.GetASingleTour(2));
-        //cross.Crossover_PMX(pop.GetASingleTour(0), pop.GetASingleTour(2));
-
-        //Selection select= new Selection();
-        //select.Selection_FPS(pop.GetAllTours());
-        //select.getRanked_fitness(pop.GetAllTours());
-        //select.Selection_Tournament(pop.GetAllTours(), 5);
-
+        System.out.println("\nExecution time is: " + formatter.format((end - start) / 1000d) + " seconds");
 
 
     }

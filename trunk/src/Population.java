@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Population represents a set of solutions.
@@ -34,6 +35,12 @@ public class Population {
 		multiple_tours.add(single_tour);
 	}
 	
+	//Add all of the individuals
+	public void AddAllTours(ArrayList<Individual> multi_tours)
+	{
+		multiple_tours.addAll(multi_tours);
+	}
+	
 	//Get an individual from the population
 	public Individual GetASingleTour(int index)
 	{
@@ -45,13 +52,60 @@ public class Population {
         return multiple_tours;
     }
 
-	
 	//Return the size of the population
 	public int PopulationSize()
 	{
 		return multiple_tours.size();
 	}
+	
+	//Find out the shortest tour
+	public Individual FindShortest()
+	{
+		Individual Shortest = GetASingleTour(0);
+		
+		for(int i = 0; i < multiple_tours.size(); i++)
+		{
+			if(Shortest.TotalDistance() > GetASingleTour(i).TotalDistance())
+			{
+				Shortest = GetASingleTour(i);
+			}
+		}
+		
+		return Shortest;	
+	}
+	
+	
+	//Get top N individuals
+	public ArrayList<Individual> TopN(int num)
+	{
+		ArrayList<Individual> TopN = new ArrayList<Individual>(num);
+		ArrayList<Individual> Temp = new ArrayList<Individual>(multiple_tours);
+		
+		Collections.sort(Temp);
+		
+		for(int i = 0; i < num; i++)
+		{
+			TopN.add(Temp.get(i));
+		}
+		
+		return TopN;	
+	}
+	
+	
+	//Get the total distance in a population
+	public double SumOfDistance()
+	{
+		double sumUp = 0.0;
+		
+		for(int i = 0; i<multiple_tours.size(); i++)
+		{
+			sumUp += multiple_tours.get(i).TotalDistance();
+		}
+		
+		return sumUp;
+	}
 
+	
     @Override
     public String toString() {
         String result = "";

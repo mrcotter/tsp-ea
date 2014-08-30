@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 /**
@@ -6,7 +5,6 @@ import java.util.*;
  */
 
 public class Crossover {
-
 
     private ArrayList<Individual> offsprings = new ArrayList<Individual>();
 
@@ -69,25 +67,6 @@ public class Crossover {
 	    offsprings.add(new Individual(new ArrayList<Node>(child_1)));
 	    offsprings.add(new Individual(new ArrayList<Node>(child_2)));
 
-	    /*
-	    //Output test for parents
-	    System.out.println();
-	    System.out.println(parent_1.toString());
-	    System.out.println(parent_2.toString());
-	    System.out.println();
-
-	    //Output test for children
-	    for (int i = 0; i < size; i++) {
-	        System.out.print(child_1.get(i).getID() + " ");
-	    }
-	    System.out.println();
-	    for (int i = 0; i < size; i++) {
-	        System.out.print(child_2.get(i).getID() + " ");
-	    }
-	    System.out.println();
-	    //System.out.println(offsprings.get(0).toString());
-	    //System.out.println(offsprings.get(1).toString());
-	    */
 	}
 
     //PMX crossover
@@ -207,21 +186,6 @@ public class Crossover {
         offsprings.add(new Individual(new ArrayList<Node>(child_1)));
         offsprings.add(new Individual(new ArrayList<Node>(child_2)));
 
-        /*
-        //Output test for parents
-        System.out.println(parent_1.toString());
-        System.out.println(parent_2.toString());
-        System.out.println();
-
-        //Output test for children
-        for (int i = 0; i < size; i++) {
-            System.out.print(child_1.get(i).getID() + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < size; i++) {
-            System.out.print(child_2.get(i).getID() + " ");
-        }
-        */
     }
 
     // Cycle Crossover
@@ -280,24 +244,6 @@ public class Crossover {
         offsprings.add(new Individual(new ArrayList<Node>(child_1)));
         offsprings.add(new Individual(new ArrayList<Node>(child_2)));
         
-        //System.out.println(offsprings.get(0).toString());
-        //System.out.println(offsprings.get(1).toString());
-/*
-        	        //Output test for parents
-	        System.out.println();
-	        System.out.println(parent_1.toString());
-	        System.out.println(parent_2.toString());
-	        System.out.println();
-
-	        //Output test for children
-	        for (int i = 0; i < size; i++) {
-	            System.out.print(child_1.get(i).getID() + " ");
-	        }
-	        System.out.println();
-	        for (int i = 0; i < size; i++) {
-	            System.out.print(child_2.get(i).getID() + " ");
-	        }
-	        */
     }
 
         // Edge Recombination Crossover

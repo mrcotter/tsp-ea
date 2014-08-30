@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,7 +18,7 @@ public class Map {
     }
 
     //Add the contents of this map from the TSPLIB reader
-    public void addNodes(Node node) {
+    public void addNodes(Node node) throws IOException {
         nodes.add(node);
     }
     

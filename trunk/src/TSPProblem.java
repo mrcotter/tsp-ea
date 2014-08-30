@@ -15,9 +15,15 @@ public class TSPProblem {
 
     private Map map;
 
+    //Construct an empty TSPLIB problem
+    public TSPProblem() {
+        super();
+        map = new Map();
+    }
+
     //Construct a TSPLIB problem instance from a file
     public TSPProblem(File file) throws IOException {
-        map = new Map();
+        this();
         load(file);
     }
 

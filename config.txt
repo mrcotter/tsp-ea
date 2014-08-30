@@ -4,7 +4,7 @@
 tsp=eil51.tsp
 
 # Population Size: 10, 20, 50, 100
-pop_size=50
+pop_size=20
 
 # Mutation Rate [0,1]
 mut_rate=0.01
@@ -19,7 +19,7 @@ generations=10000
 mut_type=3
 
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
-cross_type=1
+cross_type=4
 
 # Selection Type: 1 - FPS, 2 - Tournament
 sel_type=2
@@ -28,4 +28,4 @@ sel_type=2
 elitism=false
 
 # Elitism size [0, popsize]
-elitism_size=5
+elitism_size=2

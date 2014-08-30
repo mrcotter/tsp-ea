@@ -23,7 +23,7 @@ public class TSP_Driver {
             while ((line = config_reader.readLine()) != null) {
                 line = line.trim();
 
-                if (!line.isEmpty() || !line.contains("#")) {
+                if (!line.isEmpty() && !line.contains("#")) {
                     if (line.contains("=")) {
 
                         String[] tokens = line.split("=");

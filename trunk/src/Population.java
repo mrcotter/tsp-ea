@@ -96,11 +96,10 @@ public class Population {
 	public double SumOfDistance()
 	{
 		double sumUp = 0.0;
-		
-		for(int i = 0; i<multiple_tours.size(); i++)
-		{
-			sumUp += multiple_tours.get(i).TotalDistance();
-		}
+
+        for (Individual multiple_tour : multiple_tours) {
+            sumUp += multiple_tour.TotalDistance();
+        }
 		
 		return sumUp;
 	}

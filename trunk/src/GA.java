@@ -108,7 +108,7 @@ public class GA {
         
 
 
-        //Mutate the next generation a bit
+        //Mutate each child in the next generation a bit
         for (int i = elitism_size; i < pop_size; i++) {
 
             if(Math.random() <= mut_rate) {

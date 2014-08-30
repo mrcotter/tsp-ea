@@ -1,13 +1,13 @@
 # TSP configuration
 
 # TSPLIB File
-tsp=eil51.tsp
+tsp=kroA100.tsp
 
 # Population Size: 10, 20, 50, 100
-pop_size=20
+pop_size=50
 
 # Mutation Rate [0,1]
-mut_rate=0.01
+mut_rate=0.05
 
 # Crossover Rate [0,1]
 cross_rate=0.5
@@ -25,7 +25,7 @@ cross_type=2
 sel_type=2
 
 # Use Elitism: true / false
-elitism=false
+elitism=true
 
 # Elitism size [0, popsize]
 elitism_size=2

@@ -109,8 +109,11 @@ public class TSP_Driver {
             }
         }
 
+
+        //Print best path and result
+        DecimalFormat df = new DecimalFormat("#.####");
         System.out.println("\nFinal Path: " + best_path.toString());
-        System.out.println("Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.");
+        System.out.println("Shortest Distance: " + df.format(best_result) + " occurs in " + num_generation + "th generation.");
 
         long end = System.currentTimeMillis();
         //Calculate program running time

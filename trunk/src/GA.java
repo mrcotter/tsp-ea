@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * GA represents the process of evolving population algorithms
@@ -82,7 +84,17 @@ public class GA {
                         break;
 
                     case 4:
+                        ArrayList<Individual> tours = pop.GetAllTours();
+                        int size = tours.get(0).NumberOfNodes();
 
+                        HashMap<Integer, Node> lookup_table = new HashMap<Integer, Node>(size);
+                        for (Node node: tours.get(0).getNodeList())
+                            lookup_table.put(node.getID(), node);
+
+                        crossover.Crossover_Edge_Recombination(parent_1, parent_2, lookup_table);
+                        crossover.Crossover_Edge_Recombination(parent_2, parent_1, lookup_table);
+                        next_generation.AddASingleTour(crossover.getOffsprings().get(0));
+                        next_generation.AddASingleTour(crossover.getOffsprings().get(1));
                         break;
                 }
             } else {
@@ -90,9 +102,11 @@ public class GA {
                 next_generation.AddASingleTour(parent_2);
             }
 
+            crossover.clear();
+
         }
         
-        crossover.clear();
+
 
         //Mutate the next generation a bit
         for (int i = elitism_size; i < pop_size; i++) {

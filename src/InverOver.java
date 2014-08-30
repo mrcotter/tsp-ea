@@ -10,7 +10,7 @@ public class InverOver {
 		this.pop = pop;
 	}
 	
-	public void Implement(double prob)
+	public Population Implement(double prob)
 	{
 		Individual Current_Tour = null;
 		Node City = null;
@@ -78,7 +78,7 @@ public class InverOver {
 				
 		}
 		
-		
+		return pop;
 	}
 	
 	

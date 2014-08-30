@@ -9,6 +9,7 @@ public class Individual implements Comparable<Individual> {
 	
 	private ArrayList<Node> single_tour = new ArrayList<Node>();
 	private Map map;
+    
 
     //Initialize a tour
 	public Individual(Map map)
@@ -26,9 +27,9 @@ public class Individual implements Comparable<Individual> {
 	public void CreateRandomTour()
 	{
         //System.out.println(map.GetNode(0).getID());
-		for (int i = 0; i < map.NumberOfNodes(); i++)
+		for (int i=0; i < map.NumberOfNodes(); i++)
 		{
-			single_tour.add(map.GetNode(i));
+			single_tour.add(i, map.GetNode(i));
 		}
 
         Collections.shuffle(single_tour);
@@ -81,13 +82,12 @@ public class Individual implements Comparable<Individual> {
 		double TotalDistance = 0.0;
 		Node Node_Start;
 		Node Node_End;
-
-		int size = single_tour.size();
-		for (int i = 0; i < size; i++)
+		
+		for (int i = 0; i < single_tour.size(); i++)
 		{
 			Node_Start = GetANode(i);
 			
-			if((i + 1) < size)
+			if(i+1 < single_tour.size())
 			{
 				Node_End = GetANode(i+1);
 			}
@@ -116,7 +116,7 @@ public class Individual implements Comparable<Individual> {
 
     @Override
     public int compareTo(Individual tour) {
-        if (Math.abs(this.TotalDistance() - tour.TotalDistance()) <= 0.000001) {
+        if (this.TotalDistance() == tour.TotalDistance()) {
             return 0;
         } else {
             return this.TotalDistance() > tour.TotalDistance() ? 1 : -1;

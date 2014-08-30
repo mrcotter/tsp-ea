@@ -7,7 +7,7 @@ tsp=eil51.tsp
 pop_size=20
 
 # Mutation Rate [0,1]
-mut_rate=0.4
+mut_rate=0.01
 
 # Crossover Rate [0,1]
 cross_rate=0.5

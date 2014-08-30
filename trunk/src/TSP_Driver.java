@@ -79,6 +79,8 @@ public class TSP_Driver {
             }
         }
 
+
+
         TSPProblem tsp = new TSPProblem(new File("./data/" + file_name));
         //problem.printProblem();
         Map map = tsp.getMap();
@@ -87,9 +89,10 @@ public class TSP_Driver {
         double best_result, temp_result;
         int num_generation;
 
-        long start = System.currentTimeMillis();
 
         //Start GA
+        long start = System.currentTimeMillis();
+
         GA ga = new GA(pop_size, mut_rate, mut_type,
                         cross_rate, cross_type, sel_type, elitism, elitism_size);
         

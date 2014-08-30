@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 
 
-public class InvertOver {
+public class InverOver {
 	
 	private Population pop;
 	
-	public InvertOver(Population pop)
+	public InverOver(Population pop)
 	{
 		this.pop = pop;
 	}
@@ -26,7 +26,7 @@ public class InvertOver {
 			{
 				Current_Tour = pop.GetASingleTour(i);
 				
-				RandomPos = (int)Math.random() * Current_Tour.NumberOfNodes();
+				RandomPos = (int) (Math.random() * Current_Tour.NumberOfNodes());
 				
 				City = Current_Tour.GetANode(RandomPos);
 				
@@ -36,10 +36,10 @@ public class InvertOver {
 				
 				if(Math.random() <= prob)
 				{
-					NextPos = (int)Math.random() * Current_Tour.NumberOfNodes();
+					NextPos = (int) (Math.random() * Current_Tour.NumberOfNodes());
 					while(RandomPos == NextPos)
 					{
-						NextPos = (int)Math.random() * Current_Tour.NumberOfNodes();
+						NextPos = (int) (Math.random() * Current_Tour.NumberOfNodes());
 					}
 					
 					City_ = Current_Tour.GetANode(NextPos);
@@ -47,10 +47,10 @@ public class InvertOver {
 				}
 				else
 				{
-					int Random_Individual = (int)Math.random()*pop.PopulationSize();
+					int Random_Individual = (int) (Math.random() * pop.PopulationSize());
 					while(Random_Individual == i)
 					{
-						Random_Individual = (int)Math.random()*pop.PopulationSize();
+						Random_Individual = (int) (Math.random() * pop.PopulationSize());
 					}
 					
 					Individual Temp_Tour = pop.GetASingleTour(Random_Individual);

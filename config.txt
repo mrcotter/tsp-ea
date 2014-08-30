@@ -4,7 +4,7 @@
 tsp=eil51.tsp
 
 # Population Size: 10, 20, 50, 100
-pop_size=20
+pop_size=50
 
 # Mutation Rate [0,1]
 mut_rate=0.01

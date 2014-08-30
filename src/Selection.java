@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Selection represents fitness based competition to select parents and offsprings
@@ -41,10 +40,8 @@ public class Selection {
     		int random_Tour = (int) (Math.random() * pop.PopulationSize());
     		Tournament_Select.AddASingleTour(pop.GetASingleTour(random_Tour));
     	}
-    	
-    	Individual Shortest = Tournament_Select.FindShortest();
 
-        return Shortest;
+        return Tournament_Select.FindShortest();
     }
 
     //Elitism Selection

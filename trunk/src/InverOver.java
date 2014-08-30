@@ -32,7 +32,7 @@ public class InverOver {
 				
 			PrevCity = Current_Tour.GetANode(RandomPos-1);
 
-			while(City_.getID() != NextCity.getID() && City_.getID() != PrevCity.getID())
+			do
 			{
 				if(Math.random() <= prob)
 				{
@@ -61,7 +61,7 @@ public class InverOver {
 					
 				}
 
-			}
+			}while(City_.getID() != NextCity.getID() && City_.getID() != PrevCity.getID());
 				
 			InverseSET(RandomPos, NextPos, Current_Tour);
 				

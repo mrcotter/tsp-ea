@@ -7,7 +7,6 @@ import java.text.NumberFormat;
 public class TSP_Driver {
     public static void main(String[] args) throws Exception {
 
-
         String file_name = "";
         int pop_size = 0, generations = 0, elitism_size = 0;
         double mut_rate = 0.0, cross_rate = 0.0;
@@ -85,6 +84,8 @@ public class TSP_Driver {
         Map map = tsp.getMap();
         //map.printNodes();
         Population pop = new Population(pop_size, map);
+        double best_result, temp_result;
+        int num_generation;
 
         long start = System.currentTimeMillis();
 
@@ -93,14 +94,23 @@ public class TSP_Driver {
                         cross_rate, cross_type, sel_type, elitism, elitism_size);
         
         pop = ga.runGA(pop);
+        Individual best_path = pop.FindShortest();
+        best_result = pop.FindShortest().TotalDistance();
+        num_generation = 1;
 
-        for (int i = 0; i < generations; i++) {
+        for (int i = 1; i < generations; i++) {
             pop = ga.runGA(pop);
+            temp_result = pop.FindShortest().TotalDistance();
+
+            if (temp_result < best_result) {
+                best_path = pop.FindShortest();
+                best_result = temp_result;
+                num_generation = i+1;
+            }
         }
 
-        System.out.println("Final Path: " + pop.FindShortest());
-     
-        System.out.println("\nFinal Distance: " + pop.FindShortest().TotalDistance());
+        System.out.println("\nFinal Path: " + best_path.toString());
+        System.out.println("Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.");
 
         long end = System.currentTimeMillis();
         //Calculate program running time

@@ -19,7 +19,7 @@ generations=10000
 mut_type=3
 
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
-cross_type=4
+cross_type=2
 
 # Selection Type: 1 - FPS, 2 - Tournament
 sel_type=2

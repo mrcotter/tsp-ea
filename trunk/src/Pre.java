@@ -2,7 +2,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-public class TSP_Driver_pre {
+public class Pre {
     public static void main(String[] args) throws Exception {
 
         String file_name="";
@@ -98,7 +98,7 @@ public class TSP_Driver_pre {
                 content=content+"\nmutation rate: "+mut_rate;
 
                 double totalShortest=0;
-                double totalTime=0;
+                long totalTime=0;
 
                 // run for ten times
                 for (int r=0; r<repeat; r++) {
@@ -146,14 +146,14 @@ public class TSP_Driver_pre {
                     long end = System.currentTimeMillis();
                     //Calculate program running time
                     NumberFormat formatter = new DecimalFormat("#0.00000");
-                    content = content + "\nExecution time is: " + formatter.format((end - start) / 1000d) + " seconds";
+//                    content = content + "\nExecution time is: " + formatter.format((end - start) / 1000d) + " seconds";
                     totalTime+=(end-start);
-                    System.out.println("average time till now: "+totalTime/(r+1));
+                    System.out.println("average time till now (ms): "+totalTime/(r+1));
                 }
                 content=content+"\nAVERAGE shortest distance: "+totalShortest/repeat+"\n";
-                content=content+"\nAVERAGE compute time: "+totalTime/repeat+"\n";
+                content=content+"\nAVERAGE execution time: "+totalTime/repeat+"\n";
                 System.out.println("-- AVERAGE shortest distance: "+ totalShortest/repeat);
-                System.out.println("-- AVERAGE compute time: "+ totalTime/repeat+"\n");
+                System.out.println("-- AVERAGE execution time (ms): "+ totalTime/repeat+"\n");
 
             }
         }

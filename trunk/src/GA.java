@@ -30,8 +30,8 @@ public class GA {
     public Population run(Population pop) {
 
         if (inverover) {
-            InverOver io = new InverOver(pop);
-            pop = io.Implement(io_rate);
+            InverOver io = new InverOver();
+            pop = io.Implement(io_rate, pop);
 
         } else {
             return runGA(pop);

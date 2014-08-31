@@ -13,10 +13,10 @@ generations=10000
 repeat=10
 
 # InverOver rate [0,1]
-io_rate=0.5
+io_rate=0.02
 
 # InverOver true / false (This will disable all the following options)
-inverover=false
+inverover=true
 
 # Mutation Rate [0,1]
 mut_rate=0.03

@@ -7,9 +7,9 @@ public class Pre {
 
         String file_name="";
         int pop_size = 0, generations = 0, elitism_size = 0;
-        double mut_rate = 0.0, cross_rate = 0.0;
+        double io_rate = 0.0, mut_rate = 0.0, cross_rate = 0.0;
         int mut_type = 0, cross_type = 0, sel_type = 0;
-        boolean elitism = false;
+        boolean elitism = false, inverover = false;
         int repeat = 0;
 
         //Read config file
@@ -39,6 +39,15 @@ public class Pre {
 
                         if (token_0.equals("generations")) {
                             generations = Integer.parseInt(token_1);
+                        }
+
+                        if (token_0.equals("inverover")) {
+                            if (token_1.toLowerCase().equals("true")) inverover = true;
+                            if (token_1.toLowerCase().equals("false")) inverover = false;
+                        }
+
+                        if (token_0.equals("io_rate")) {
+                            io_rate = Double.parseDouble(token_1);
                         }
 
                         if (token_0.equals("mut_rate")) {
@@ -92,16 +101,17 @@ public class Pre {
             mut_type=mut_type_iterate;
             System.out.println("----------\nmutation type: "+mut_type);
             content=content+"----------\nmutation type: "+mut_type+"\n";
+
             for (double mut_rate_iterate : mut_rates){
                 mut_rate=mut_rate_iterate;
                 System.out.println("mutation rate: "+mut_rate);
                 content=content+"\nmutation rate: "+mut_rate;
 
-                double totalShortest=0;
+                double totalShortest=0.0;
                 long totalTime=0;
 
-                // run for ten times
-                for (int r=0; r<repeat; r++) {
+                // Total run for several times defined in repeat
+                for (int r=1; r<=repeat; r++) {
 
                     System.out.println("\nRound: "+ r);
 //                content=content+"\nRound: "+r+"\n";
@@ -117,16 +127,16 @@ public class Pre {
                     long start = System.currentTimeMillis();
 
                     //Start GA
-                    GA ga = new GA(pop_size, mut_rate, mut_type,
+                    GA ga = new GA(pop_size, inverover, io_rate, mut_rate, mut_type,
                             cross_rate, cross_type, sel_type, elitism, elitism_size);
 
-                    pop = ga.runGA(pop);
+                    pop = ga.run(pop);
                     Individual best_path = pop.FindShortest();
                     best_result = pop.FindShortest().TotalDistance();
                     num_generation = 1;
 
                     for (int i = 1; i < generations; i++) {
-                        pop = ga.runGA(pop);
+                        pop = ga.run(pop);
                         temp_result = pop.FindShortest().TotalDistance();
 
                         if (temp_result < best_result) {
@@ -150,6 +160,7 @@ public class Pre {
                     totalTime+=(end-start);
                     System.out.println("average time till now (ms): "+totalTime/(r+1));
                 }
+
                 content=content+"\nAVERAGE shortest distance: "+totalShortest/repeat+"\n";
                 content=content+"\nAVERAGE execution time: "+totalTime/repeat+"\n";
                 System.out.println("-- AVERAGE shortest distance: "+ totalShortest/repeat);
@@ -179,7 +190,7 @@ public class Pre {
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("failed to write log file!");
+            System.out.println("Failed to write log file!");
         }
 
     }

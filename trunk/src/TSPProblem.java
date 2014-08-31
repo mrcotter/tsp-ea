@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 /**
  * TSPProblem represents a TSPLIB problem instance.
@@ -70,7 +71,16 @@ public class TSPProblem {
                         }
 
                         int id = Integer.parseInt(tokens[0].trim());
-                        int position[] = new int[] {Integer.parseInt(tokens[1].trim()), Integer.parseInt(tokens[2].trim())};
+
+                        int position[];
+                        if (tokens[1].contains("e")) {
+                            int position_1 = new BigDecimal(tokens[1].trim()).intValue();
+                            int position_2 = new BigDecimal(tokens[2].trim()).intValue();
+                            position = new int[] {position_1, position_2};
+                        } else {
+                            position = new int[] {Integer.parseInt(tokens[1].trim()), Integer.parseInt(tokens[2].trim())};
+                        }
+
                         Node node = new Node(id, position);
                         map.addNodes(node);
                     }

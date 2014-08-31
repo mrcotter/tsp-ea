@@ -77,8 +77,8 @@ public class InverTest {
             file_name = file_name.trim();
 
             System.out.println("TSPLIB File: " + file_name);
-            String content = "";
-            content += file_name + "\n";
+            String totalContent = "";
+            totalContent += file_name + "\n";
 
             double totalShortest = 0.0;
             long totalTime = 0;
@@ -86,7 +86,10 @@ public class InverTest {
             if (inverover) {
                 // Total run for several times defined in repeat
                 for (int r = 1; r <= repeat; r++) {
-                    System.out.println("\nRound: " + r);
+                    System.out.println("\nInverOver - Round: " + r);
+
+                    String content = "";
+                    content += file_name + "\n";
 
                     TSPProblem tsp = new TSPProblem(new File("./data/" + file_name));
                     //problem.printProblem();
@@ -116,10 +119,17 @@ public class InverTest {
                             best_result = temp_result;
                             num_generation = i + 1;
                         }
+                        if (i==5000 || i==10000 || i==20000 ){
+                            content = content + "**Till "+i+"th generation, shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.\n";
+                            System.out.println("**Till "+i+"th generation, shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.");
+                        }else if(i%1000==0) {
+                            content = content + "Till "+i+"th generation, best tour length so far: " + best_result + " \n";
+                            System.out.println("Till "+i+"th generation, best tour length so far: " + best_result);
+                        }
                     }
 
-//                content = content + "Final Path: " + best_path.toString() + "\n";
-//                content = content + "Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.";
+                    content = content + "Final Path: " + best_path.toString() + "\n";
+                    content = content + "Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.";
                     System.out.println("Final Path: " + best_path.toString());
                     System.out.println("Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.");
 
@@ -130,15 +140,36 @@ public class InverTest {
 //                    content = content + "\nExecution time is: " + formatter.format((end - start) / 1000d) + " seconds";
                     totalTime += (end - start);
                     System.out.println("average time till now (ms): " + totalTime / (r + 1));
+                    content = content + "time spent in this round: " + (end-start)+ "\n";
+                    // write to log file
+                    try {
+                        String logFileName = file_name.split("\\.")[0] +r+ ".log";
+                        File file = new File("./" + logFileName);
+
+                        // if file doesnt exists, then create it
+                        if (!file.exists()) {
+                            file.createNewFile();
+                        }
+
+                        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        bw.write(content);
+                        bw.close();
+
+                        System.out.println("\nFinished writing to log file.");
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        System.out.println("Failed to write log file!");
+                    }
                 }
 
-                content = content + "\nAVERAGE shortest distance: " + totalShortest / repeat + "\n";
-                content = content + "\nAVERAGE execution time: " + totalTime / repeat + "\n";
+                totalContent = totalContent + "\nAVERAGE shortest distance: " + totalShortest / repeat + "\n";
+                totalContent = totalContent + "\nAVERAGE execution time: " + totalTime / repeat + "\n";
                 System.out.println("\n-- AVERAGE shortest distance: " + totalShortest / repeat);
                 System.out.println("-- AVERAGE execution time (ms): " + totalTime / repeat + "\n");
 
             }
-            // write to log file
             try {
                 String logFileName = file_name.split("\\.")[0] + ".log";
                 File file = new File("./" + logFileName);
@@ -150,7 +181,7 @@ public class InverTest {
 
                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
                 BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(content);
+                bw.write(totalContent);
                 bw.close();
 
                 System.out.println("\nFinished writing to log file.");
@@ -159,6 +190,7 @@ public class InverTest {
                 e.printStackTrace();
                 System.out.println("Failed to write log file!");
             }
+
         }
     }
 }

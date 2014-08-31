@@ -1,7 +1,7 @@
 # TSP configuration
 
 # TSPLIB File
-tsp=eil51.tsp, eil76.tsp, eil101.tsp, kroA100.tsp, kroB100.tsp, kroC100.tsp,
+tsp=pcb442.tsp
 
 # Population Size: 10, 20, 50, 100
 pop_size=20
@@ -10,13 +10,13 @@ pop_size=20
 generations=10000
 
 # Repeat [1, 10]
-repeat=10
+repeat=5
 
 # InverOver rate [0,1]
 io_rate=0.02
 
 # InverOver true / false (This will disable all the following options)
-inverover=true
+inverover=false
 
 # Mutation Rate [0,1]
 mut_rate=0.03

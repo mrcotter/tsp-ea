@@ -1,0 +1,24 @@
+lin105.tsp
+Till 1000th generation, best tour length so far: 65784.72515328175 
+Till 2000th generation, best tour length so far: 54917.791232637304 
+Till 3000th generation, best tour length so far: 50420.3391117567 
+Till 4000th generation, best tour length so far: 43987.31857914974 
+**Till 5000th generation, shortest Distance: 41395.679125378774 occurs in 4885th generation.
+Till 6000th generation, best tour length so far: 39528.44469624319 
+Till 7000th generation, best tour length so far: 37936.45995427841 
+Till 8000th generation, best tour length so far: 36856.09923747683 
+Till 9000th generation, best tour length so far: 35648.946071096674 
+**Till 10000th generation, shortest Distance: 33982.6111729304 occurs in 9778th generation.
+Till 11000th generation, best tour length so far: 33442.832640556946 
+Till 12000th generation, best tour length so far: 32220.96537216107 
+Till 13000th generation, best tour length so far: 31445.99556674979 
+Till 14000th generation, best tour length so far: 30786.723591689315 
+Till 15000th generation, best tour length so far: 30268.019907517864 
+Till 16000th generation, best tour length so far: 30243.47178678418 
+Till 17000th generation, best tour length so far: 30109.234025131318 
+Till 18000th generation, best tour length so far: 29589.245526239447 
+Till 19000th generation, best tour length so far: 29215.32579975627 
+**Till 20000th generation, shortest Distance: 28946.622574403304 occurs in 19975th generation.
+
+Final Shortest Distance: 28946.622574403304 occurs in 19975th generation.
+Execution time: 218111

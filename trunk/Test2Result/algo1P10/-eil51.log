@@ -1,0 +1,24 @@
+eil51.tsp
+Till 1000th generation, best tour length so far: 753.0483590065242 
+Till 2000th generation, best tour length so far: 682.0786730755424 
+Till 3000th generation, best tour length so far: 629.667691199161 
+Till 4000th generation, best tour length so far: 574.9688806939271 
+**Till 5000th generation, shortest Distance: 529.1023811312135 occurs in 4959th generation.
+Till 6000th generation, best tour length so far: 524.7060428507594 
+Till 7000th generation, best tour length so far: 524.7060428507594 
+Till 8000th generation, best tour length so far: 516.7107226352565 
+Till 9000th generation, best tour length so far: 506.32227526191656 
+**Till 10000th generation, shortest Distance: 488.2968064696602 occurs in 9285th generation.
+Till 11000th generation, best tour length so far: 488.2968064696602 
+Till 12000th generation, best tour length so far: 482.9761216634141 
+Till 13000th generation, best tour length so far: 480.75506343468976 
+Till 14000th generation, best tour length so far: 472.01527657562934 
+Till 15000th generation, best tour length so far: 470.9334336342305 
+Till 16000th generation, best tour length so far: 467.9099373305328 
+Till 17000th generation, best tour length so far: 467.9099373305328 
+Till 18000th generation, best tour length so far: 467.9099373305328 
+Till 19000th generation, best tour length so far: 467.9099373305328 
+**Till 20000th generation, shortest Distance: 464.4842114087303 occurs in 19722th generation.
+
+Final Shortest Distance: 464.4842114087303 occurs in 19722th generation.
+Execution time: 68238

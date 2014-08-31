@@ -1,0 +1,24 @@
+kroD100.tsp
+Till 1000th generation, best tour length so far: 90958.06965700505 
+Till 2000th generation, best tour length so far: 65751.19465305426 
+Till 3000th generation, best tour length so far: 56967.89151726094 
+Till 4000th generation, best tour length so far: 51485.5842628952 
+**Till 5000th generation, shortest Distance: 48896.53193246068 occurs in 4780th generation.
+Till 6000th generation, best tour length so far: 43733.822737428454 
+Till 7000th generation, best tour length so far: 42239.50392031346 
+Till 8000th generation, best tour length so far: 39893.98781853068 
+Till 9000th generation, best tour length so far: 39565.96977779837 
+**Till 10000th generation, shortest Distance: 36907.67965938947 occurs in 9849th generation.
+Till 11000th generation, best tour length so far: 36067.76115055677 
+Till 12000th generation, best tour length so far: 34559.051310245944 
+Till 13000th generation, best tour length so far: 33066.980764318636 
+Till 14000th generation, best tour length so far: 32788.347664346875 
+Till 15000th generation, best tour length so far: 32164.340291947028 
+Till 16000th generation, best tour length so far: 32012.12727860272 
+Till 17000th generation, best tour length so far: 31438.69399892901 
+Till 18000th generation, best tour length so far: 30593.29930232882 
+Till 19000th generation, best tour length so far: 29699.66740974995 
+**Till 20000th generation, shortest Distance: 29297.775641170912 occurs in 19756th generation.
+
+Final Shortest Distance: 29297.775641170912 occurs in 19756th generation.
+Execution time: 74191

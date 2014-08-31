@@ -1,0 +1,24 @@
+st70.tsp
+Till 1000th generation, best tour length so far: 1980.640278378978 
+Till 2000th generation, best tour length so far: 1535.4499535384548 
+Till 3000th generation, best tour length so far: 1261.3640952427095 
+Till 4000th generation, best tour length so far: 1187.5982858912078 
+**Till 5000th generation, shortest Distance: 1117.9049738898875 occurs in 4995th generation.
+Till 6000th generation, best tour length so far: 1057.4410984976917 
+Till 7000th generation, best tour length so far: 992.5634476297391 
+Till 8000th generation, best tour length so far: 945.9957397927251 
+Till 9000th generation, best tour length so far: 930.0814389673059 
+**Till 10000th generation, shortest Distance: 891.3364737547192 occurs in 9560th generation.
+Till 11000th generation, best tour length so far: 860.613664353436 
+Till 12000th generation, best tour length so far: 851.6505715888084 
+Till 13000th generation, best tour length so far: 843.225162478232 
+Till 14000th generation, best tour length so far: 812.2821040638528 
+Till 15000th generation, best tour length so far: 789.7854393143901 
+Till 16000th generation, best tour length so far: 768.8561661231521 
+Till 17000th generation, best tour length so far: 749.624679972836 
+Till 18000th generation, best tour length so far: 745.2740773756087 
+Till 19000th generation, best tour length so far: 726.0570080826301 
+**Till 20000th generation, shortest Distance: 717.7653211187636 occurs in 19178th generation.
+
+Final Shortest Distance: 717.7653211187636 occurs in 19178th generation.
+Execution time: 94571

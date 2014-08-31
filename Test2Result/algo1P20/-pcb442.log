@@ -1,0 +1,24 @@
+pcb442.tsp
+Till 1000th generation, best tour length so far: 533358.6435561653 
+Till 2000th generation, best tour length so far: 447236.3182337696 
+Till 3000th generation, best tour length so far: 401888.7502515018 
+Till 4000th generation, best tour length so far: 360533.9089985358 
+**Till 5000th generation, shortest Distance: 328245.9925623783 occurs in 4987th generation.
+Till 6000th generation, best tour length so far: 306589.6456786639 
+Till 7000th generation, best tour length so far: 298022.18914739793 
+Till 8000th generation, best tour length so far: 282760.02639812796 
+Till 9000th generation, best tour length so far: 271790.6663600197 
+**Till 10000th generation, shortest Distance: 262577.0430087607 occurs in 9959th generation.
+Till 11000th generation, best tour length so far: 252973.17501620864 
+Till 12000th generation, best tour length so far: 239403.314766638 
+Till 13000th generation, best tour length so far: 229254.04741422262 
+Till 14000th generation, best tour length so far: 220465.90569574488 
+Till 15000th generation, best tour length so far: 217758.34454104095 
+Till 16000th generation, best tour length so far: 213086.3578473107 
+Till 17000th generation, best tour length so far: 209127.84137044396 
+Till 18000th generation, best tour length so far: 204639.4861727928 
+Till 19000th generation, best tour length so far: 199124.93149355726 
+**Till 20000th generation, shortest Distance: 194499.87752037717 occurs in 19989th generation.
+
+Final Shortest Distance: 194499.87752037717 occurs in 19989th generation.
+Execution time: 3650902

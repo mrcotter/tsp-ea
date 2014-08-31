@@ -1,19 +1,25 @@
 # TSP configuration
 
 # TSPLIB File
-tsp=eil51.tsp, eil76.tsp, eil101.tsp, st70.tsp, kroA100.tsp, kroC100.tsp, kroD100.tsp, lin105.tsp, pcb442.tsp, pr2392.tsp
+tsp=eil51.tsp
 
 # Population Size: 10, 20, 50, 100
-pop_size=50
+pop_size=20
+
+# Generations: 5000, 10000, 20000
+generations=10000
+
+# InverOver rate
+io_rate=0.5
+
+# InverOver (This will disable all the following options
+inverover=true
 
 # Mutation Rate [0,1]
 mut_rate=0.03
 
 # Crossover Rate [0,1]
 cross_rate=0.5
-
-# Generations: 5000, 10000, 20000
-generations=10000
 
 # Mutation Type: 1 - Insert, 2 - Swap, 3 - Inversion, 4 - Scramble
 mut_type=3

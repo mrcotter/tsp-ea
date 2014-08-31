@@ -1,7 +1,7 @@
 Documentation
 --------------------------
 
-Tsp-ea project revision 120, 31/08/2014.
+Tsp-ea project revision 123, Group 9, 31/08/2014.
 Tsp-ea project is the implementation of different evolutionary algorithms for the traveling salesman problem (TSP). It is written and compiled using Java SDK(1.6.0 65) and Ant(1.9.4).
 
 

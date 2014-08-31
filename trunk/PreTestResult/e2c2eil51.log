@@ -1,0 +1,69 @@
+eil51.tsp
+----------
+mutation type: 1
+
+mutation rate: 0.01
+AVERAGE shortest distance: 610.3159883080673
+
+AVERAGE execution time: 55870
+
+mutation rate: 0.03
+AVERAGE shortest distance: 519.6093700751102
+
+AVERAGE execution time: 60910
+
+mutation rate: 0.05
+AVERAGE shortest distance: 498.36301284503935
+
+AVERAGE execution time: 67995
+----------
+mutation type: 2
+
+mutation rate: 0.01
+AVERAGE shortest distance: 680.1834881536165
+
+AVERAGE execution time: 57999
+
+mutation rate: 0.03
+AVERAGE shortest distance: 599.3220397068878
+
+AVERAGE execution time: 66825
+
+mutation rate: 0.05
+AVERAGE shortest distance: 564.7646253816665
+
+AVERAGE execution time: 67115
+----------
+mutation type: 3
+
+mutation rate: 0.01
+AVERAGE shortest distance: 515.5591559141828
+
+AVERAGE execution time: 62329
+
+mutation rate: 0.03
+AVERAGE shortest distance: 466.6837381395485
+
+AVERAGE execution time: 64235
+
+mutation rate: 0.05
+AVERAGE shortest distance: 456.7814769682087
+
+AVERAGE execution time: 69325
+----------
+mutation type: 4
+
+mutation rate: 0.01
+AVERAGE shortest distance: 928.7032825137372
+
+AVERAGE execution time: 58101
+
+mutation rate: 0.03
+AVERAGE shortest distance: 835.9363747210807
+
+AVERAGE execution time: 62297
+
+mutation rate: 0.05
+AVERAGE shortest distance: 822.5062980494171
+
+AVERAGE execution time: 66777

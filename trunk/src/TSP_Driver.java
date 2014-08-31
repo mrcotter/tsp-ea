@@ -15,50 +15,64 @@ public class TSP_Driver {
         try {
             config_reader = new BufferedReader(new FileReader("./config.txt"));
             while ((line = config_reader.readLine()) != null) {
+
                 line = line.trim();
                 if (!line.isEmpty() && !line.contains("#")) {
+
                     if (line.contains("=")) {
                         String[] tokens = line.split("=");
                         String token_0 = tokens[0].trim();
                         String token_1 = tokens[1].trim();
+
                         if (token_0.equals("tsp")) {
                             file_names = token_1.trim().split(",");
                         }
+
                         if (token_0.equals("pop_size")) {
                             pop_size = Integer.parseInt(token_1);
                         }
                         if (token_0.equals("generations")) {
                             generations = Integer.parseInt(token_1);
                         }
+
                         if (token_0.equals("inverover")) {
                             if (token_1.toLowerCase().equals("true")) inverover = true;
                             if (token_1.toLowerCase().equals("false")) inverover = false;
                         }
+
                         if (token_0.equals("io_rate")) {
                             io_rate = Double.parseDouble(token_1);
                         }
+
                         if (token_0.equals("mut_rate")) {
                             mut_rate = Double.parseDouble(token_1);
                         }
+
                         if (token_0.equals("cross_rate")) {
                             cross_rate = Double.parseDouble(token_1);
                         }
+
                         if (token_0.equals("mut_type")) {
                             mut_type = Integer.parseInt(token_1);
                         }
+
                         if (token_0.equals("cross_type")) {
                             cross_type = Integer.parseInt(token_1);
                         }
+
                         if (token_0.equals("sel_type")) {
                             sel_type = Integer.parseInt(token_1);
                         }
+
                         if (token_0.equals("elitism")) {
                             if (token_1.toLowerCase().equals("true")) elitism = true;
                             if (token_1.toLowerCase().equals("false")) elitism = false;
                         }
+
                         if (token_0.equals("elitism_size")) {
                             elitism_size = Integer.parseInt(token_1);
                         }
+
                         if (token_0.equals("repeat")) {
                             repeat = Integer.parseInt(token_1);
                         }
@@ -137,6 +151,7 @@ public class TSP_Driver {
                 // Total run for several times defined in repeat
                 for (int r = 1; r <= repeat; r++) {
                     System.out.println("\nRound: " + r);
+
                     TSPProblem tsp = new TSPProblem(new File("./data/" + file_name));
                     //problem.printProblem();
                     Map map = tsp.getMap();

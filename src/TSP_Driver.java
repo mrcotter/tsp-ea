@@ -218,7 +218,7 @@ public class TSP_Driver {
                 bw.write(content);
                 bw.close();
 
-                System.out.println("\nFinished writing to log file.");
+                System.out.println("\nFinished writing to log file.\n");
 
             } catch (IOException e) {
                 e.printStackTrace();

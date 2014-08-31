@@ -1,7 +1,7 @@
 # TSP configuration
 
 # TSPLIB File
-tsp=eil51.tsp
+tsp=eil51.tsp, lin105.tsp
 
 # Population Size: 10, 20, 50, 100
 pop_size=20
@@ -9,19 +9,19 @@ pop_size=20
 # Generations: 5000, 10000, 20000
 generations=10000
 
-# Repeat [1,10]
+# Repeat [1, 10]
 repeat=5
 
-# InverOver rate [0,1]
+# InverOver Rate [0.0, 1.0]
 io_rate=0.02
 
 # InverOver true / false (This will disable all the following options)
 inverover=false
 
-# Mutation Rate [0,1]
+# Mutation Rate [0.0, 1.0]
 mut_rate=0.03
 
-# Crossover Rate [0,1]
+# Crossover Rate [0.0, 1.0]
 cross_rate=0.5
 
 # Mutation Type: 1 - Insert, 2 - Swap, 3 - Inversion, 4 - Scramble
@@ -36,5 +36,5 @@ sel_type=2
 # Use Elitism: true / false
 elitism=true
 
-# Elitism size [0, popsize]
+# Elitism Size [0, popsize]
 elitism_size=2

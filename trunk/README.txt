@@ -1,7 +1,7 @@
 Documentation
 --------------------------
 
-Tsp-ea project revision 118, 31/08/2014.
+Tsp-ea project revision 120, 31/08/2014.
 Tsp-ea project is the implementation of different evolutionary algorithms for the traveling salesman problem (TSP). It is written and compiled using Java SDK(1.6.0 65) and Ant(1.9.4).
 
 
@@ -51,7 +51,13 @@ GENERAL USAGE NOTES
 
 		ant
 
-		The object files will be in the "build" folder, whilst the jar file can be found in the "lib" folder.
+	  The object files will be in the "build" folder, whilst the jar file can be found in the "lib" folder.
+
+	- After first compiling, if you edit the config.txt file, just type:
+
+		ant run
+
+	  The program will read from the config file and run the algorithms.
 
 	- To cleanup all the object files and generated jar file , open terminal and jump to the root folder, then type:
 

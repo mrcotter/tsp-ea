@@ -1,7 +1,7 @@
 # TSP configuration
 
 # TSPLIB File
-tsp=eil51.tsp
+tsp=eil51.tsp, eil76.tsp, eil101.tsp, kroA100.tsp, kroB100.tsp, kroC100.tsp,
 
 # Population Size: 10, 20, 50, 100
 pop_size=20

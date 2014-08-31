@@ -9,11 +9,14 @@ pop_size=20
 # Generations: 5000, 10000, 20000
 generations=10000
 
-# InverOver rate
+# Repeat [1, 10]
+repeat=10
+
+# InverOver rate [0,1]
 io_rate=0.5
 
-# InverOver (This will disable all the following options
-inverover=true
+# InverOver true / false (This will disable all the following options)
+inverover=false
 
 # Mutation Rate [0,1]
 mut_rate=0.03
@@ -25,7 +28,7 @@ cross_rate=0.5
 mut_type=3
 
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
-cross_type=4
+cross_type=1
 
 # Selection Type: 1 - FPS, 2 - Tournament
 sel_type=2

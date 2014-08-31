@@ -2,7 +2,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-public class Test2 {
+public class TSP_Driver {
     public static void main(String[] args) throws Exception {
 
         String[] file_names = new String[]{};

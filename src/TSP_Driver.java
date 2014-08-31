@@ -1,6 +1,4 @@
 import java.io.*;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class TSP_Driver {
     public static void main(String[] args) throws Exception {
@@ -119,16 +117,12 @@ public class TSP_Driver {
                     }
 
 
-//                content = content + "Final Path: " + best_path.toString() + "\n";
-//                content = content + "Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.";
                     System.out.println("Final Path: " + best_path.toString());
                     System.out.println("Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.");
 
                     totalShortest += best_result;
                     long end = System.currentTimeMillis();
                     //Calculate program running time
-                    NumberFormat formatter = new DecimalFormat("#0.00000");
-//                    content = content + "\nExecution time is: " + formatter.format((end - start) / 1000d) + " seconds";
                     totalTime += (end - start);
                     System.out.println("average time till now (ms): " + totalTime / (r + 1));
                 }
@@ -139,53 +133,59 @@ public class TSP_Driver {
                 System.out.println("-- AVERAGE execution time (ms): " + totalTime / repeat + "\n");
 
             } else {
-                TSPProblem tsp = new TSPProblem(new File("./data/" + file_name));
-                //problem.printProblem();
-                Map map = tsp.getMap();
-                //map.printNodes();
-                Population pop = new Population(pop_size, map);
-                double best_result, temp_result;
-                int num_generation;
 
-                long start = System.currentTimeMillis();
+                // Total run for several times defined in repeat
+                for (int r = 1; r <= repeat; r++) {
+                    System.out.println("\nRound: " + r);
+                    TSPProblem tsp = new TSPProblem(new File("./data/" + file_name));
+                    //problem.printProblem();
+                    Map map = tsp.getMap();
+                    //map.printNodes();
+                    Population pop = new Population(pop_size, map);
+                    double best_result, temp_result;
+                    int num_generation;
 
-                //Start GA
-                GA ga = new GA(pop_size, inverover, io_rate, mut_rate, mut_type,
-                        cross_rate, cross_type, sel_type, elitism, elitism_size);
+                    long start = System.currentTimeMillis();
 
-                pop = ga.run(pop);
-                Individual best_path = pop.FindShortest();
-                best_result = pop.FindShortest().TotalDistance();
-                num_generation = 1;
+                    //Start GA
+                    GA ga = new GA(pop_size, inverover, io_rate, mut_rate, mut_type,
+                            cross_rate, cross_type, sel_type, elitism, elitism_size);
 
-                for (int i = 1; i < generations; i++) {
                     pop = ga.run(pop);
-                    temp_result = pop.FindShortest().TotalDistance();
+                    Individual best_path = pop.FindShortest();
+                    best_result = pop.FindShortest().TotalDistance();
+                    num_generation = 1;
 
-                    if (temp_result < best_result) {
-                        best_path = pop.FindShortest();
-                        best_result = temp_result;
-                        num_generation = i + 1;
+                    for (int i = 1; i < generations; i++) {
+                        pop = ga.run(pop);
+                        temp_result = pop.FindShortest().TotalDistance();
+
+                        if (temp_result < best_result) {
+                            best_path = pop.FindShortest();
+                            best_result = temp_result;
+                            num_generation = i + 1;
+                        }
+
                     }
 
+                    content = content + "Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.";
+                    System.out.println("Final Path: " + best_path.toString());
+                    System.out.println("Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.");
+
+                    totalShortest += best_result;
+                    long end = System.currentTimeMillis();
+                    //Calculate program running time
+                    totalTime += (end - start);
+                    System.out.println("average time till now (ms): " + totalTime / (r + 1));
+
+
                 }
-
-//                content = content + "Final Path: " + best_path.toString() + "\n";
-                content = content + "Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.";
-                System.out.println("Final Path: " + best_path.toString());
-                System.out.println("Shortest Distance: " + best_result + " occurs in " + num_generation + "th generation.");
-
-                totalShortest += best_result;
-                long end = System.currentTimeMillis();
-                //Calculate program running time
-                NumberFormat formatter = new DecimalFormat("#0.00000");
-//                    content = content + "\nExecution time is: " + formatter.format((end - start) / 1000d) + " seconds";
-                totalTime += (end - start);
 
                 content = content + "\nAVERAGE shortest distance: " + totalShortest / repeat + "\n";
                 content = content + "\nAVERAGE execution time: " + totalTime / repeat + "\n";
                 System.out.println("\n-- AVERAGE shortest distance: " + totalShortest / repeat);
                 System.out.println("\n-- AVERAGE execution time (ms): " + totalTime / repeat + "\n");
+
             }
 
             // write to log file

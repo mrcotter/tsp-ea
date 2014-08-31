@@ -1,7 +1,7 @@
 # TSP configuration
 
 # TSPLIB File
-tsp=pcb442.tsp
+tsp=eil51.tsp
 
 # Population Size: 10, 20, 50, 100
 pop_size=20
@@ -9,7 +9,7 @@ pop_size=20
 # Generations: 5000, 10000, 20000
 generations=10000
 
-# Repeat [1, 10]
+# Repeat [1,10]
 repeat=5
 
 # InverOver rate [0,1]
@@ -28,7 +28,7 @@ cross_rate=0.5
 mut_type=3
 
 # Crossover Type: 1 - Order, 2 - PMX, 3 - Cycle, 4 - Edge Recombination
-cross_type=1
+cross_type=2
 
 # Selection Type: 1 - FPS, 2 - Tournament
 sel_type=2

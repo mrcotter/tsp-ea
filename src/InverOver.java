@@ -1,16 +1,15 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class InverOver {
-	
-	private Population pop;
-	
-	public InverOver(Population pop)
+		
+	public InverOver()
 	{
-		this.pop = pop;
+		
 	}
 	
-	public Population Implement(double prob)
+	public Population Implement(double prob, Population pop)
 	{
 		Individual Current_Tour = null;
 		Node City = null;
@@ -23,23 +22,24 @@ public class InverOver {
 		for(int i = 0; i < pop.PopulationSize(); i++)
 		{
 			Current_Tour = pop.GetASingleTour(i);
-				
-			RandomPos = (int) (Math.random() * Current_Tour.NumberOfNodes());
-				
+			long seed = System.nanoTime();
+			Random rand = new Random(seed);
+			RandomPos = (rand.nextInt(Current_Tour.NumberOfNodes()-2) + 1);
+			
 			City = Current_Tour.GetANode(RandomPos);
-				
-			NextCity = Current_Tour.GetANode(RandomPos+1);
-				
+			
 			PrevCity = Current_Tour.GetANode(RandomPos-1);
-
+			
+			NextCity = Current_Tour.GetANode(RandomPos+1);
+							
 			do
 			{
 				if(Math.random() <= prob)
 				{
-					NextPos = (int) (Math.random() * Current_Tour.NumberOfNodes());
+					NextPos =  (rand.nextInt(Current_Tour.NumberOfNodes()-2) + 1);
 					while(RandomPos == NextPos)
 					{
-						NextPos = (int) (Math.random() * Current_Tour.NumberOfNodes());
+						NextPos =  (rand.nextInt(Current_Tour.NumberOfNodes()-2) + 1);
 					}
 					
 					City_ = Current_Tour.GetANode(NextPos);
@@ -47,10 +47,10 @@ public class InverOver {
 				}
 				else
 				{
-					int Random_Individual = (int) (Math.random() * pop.PopulationSize());
+					int Random_Individual = rand.nextInt(pop.PopulationSize()-1);
 					while(Random_Individual == i)
 					{
-						Random_Individual = (int) (Math.random() * pop.PopulationSize());
+						Random_Individual = rand.nextInt(pop.PopulationSize()-1);
 					}
 					
 					Individual Temp_Tour = pop.GetASingleTour(Random_Individual);
@@ -60,12 +60,14 @@ public class InverOver {
 					NextPos = FindPos(City_, Current_Tour);
 					
 				}
+				
+				InverseSET(RandomPos, NextPos, Current_Tour);
+				
+				City = City_;
 
 			}while(City_.getID() != NextCity.getID() && City_.getID() != PrevCity.getID());
 				
-			InverseSET(RandomPos, NextPos, Current_Tour);
-				
-			City = City_;
+			
 				
 			if(pop.GetASingleTour(i).TotalDistance() >= Current_Tour.TotalDistance())
 			{
@@ -89,8 +91,14 @@ public class InverOver {
 		{
 			if(T_Tour.GetANode(k).getID() == city.getID())
 			{
-				return T_Tour.GetANode(k+1);
-				
+				if(k == T_Tour.NumberOfNodes()-1)
+				{
+					return T_Tour.GetANode(0);
+				}
+				else
+				{
+					return T_Tour.GetANode(k+1);
+				}
 			}
 		}
 			

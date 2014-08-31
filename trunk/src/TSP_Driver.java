@@ -9,9 +9,9 @@ public class TSP_Driver {
 
         String file_name = "";
         int pop_size = 0, generations = 0, elitism_size = 0;
-        double mut_rate = 0.0, cross_rate = 0.0;
+        double io_rate = 0.0, mut_rate = 0.0, cross_rate = 0.0;
         int mut_type = 0, cross_type = 0, sel_type = 0;
-        boolean elitism = false;
+        boolean elitism = false, inverover = false;
 
         //Read config file
         BufferedReader config_reader = null;
@@ -40,6 +40,15 @@ public class TSP_Driver {
 
                         if (token_0.equals("generations")) {
                             generations = Integer.parseInt(token_1);
+                        }
+
+                        if (token_0.equals("inverover")) {
+                            if (token_1.toLowerCase().equals("true")) inverover = true;
+                            if (token_1.toLowerCase().equals("false")) inverover = false;
+                        }
+
+                        if (token_0.equals("io_rate")) {
+                            io_rate = Double.parseDouble(token_1);
                         }
 
                         if (token_0.equals("mut_rate")) {
@@ -93,16 +102,16 @@ public class TSP_Driver {
         //Start GA
         long start = System.currentTimeMillis();
 
-        GA ga = new GA(pop_size, mut_rate, mut_type,
+        GA ga = new GA(pop_size, inverover, io_rate, mut_rate, mut_type,
                         cross_rate, cross_type, sel_type, elitism, elitism_size);
         
-        pop = ga.runGA(pop);
+        pop = ga.run(pop);
         Individual best_path = pop.FindShortest();
         best_result = pop.FindShortest().TotalDistance();
         num_generation = 1;
 
         for (int i = 1; i < generations; i++) {
-            pop = ga.runGA(pop);
+            pop = ga.run(pop);
             temp_result = pop.FindShortest().TotalDistance();
 
             if (temp_result < best_result) {

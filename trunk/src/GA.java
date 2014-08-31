@@ -8,14 +8,16 @@ import java.util.HashMap;
 public class GA {
 
     private int pop_size, mut_type, cross_type, sel_type, elitism_size;
-    private double mut_rate, cross_rate;
-    private boolean elitism;
+    private double io_rate, mut_rate, cross_rate;
+    private boolean inverover,elitism;
 
 
-    public GA(int pop_size, double mut_rate, int mut_type,
+    public GA(int pop_size, boolean inverover, double io_rate, double mut_rate, int mut_type,
               double cross_rate, int cross_type, int sel_type, boolean elitism, int elitism_size) {
 
         this.pop_size = pop_size;
+        this.inverover = inverover;
+        this.io_rate = io_rate;
         this.mut_rate = mut_rate;
         this.mut_type = mut_type;
         this.cross_rate = cross_rate;
@@ -25,22 +27,35 @@ public class GA {
         this.elitism_size = elitism_size;
     }
 
-    public Population runGA(Population pop) {
+    public Population run(Population pop) {
 
+        if (inverover) {
+            InverOver io = new InverOver(pop);
+            pop = io.Implement(io_rate);
+
+        } else {
+            return runGA(pop);
+        }
+
+        return pop;
+
+    }
+
+    private Population runGA(Population pop) {
         //Initialization
         Selection select = new Selection();
         Crossover crossover = new Crossover();
         Mutation mutation = new Mutation();
         Population next_generation = new Population(pop_size);
 
-        if (!elitism) 
+        if (!elitism)
         {
             elitism_size = 0;
         }
 
-        if (elitism) 
+        if (elitism)
         {
-        	next_generation.AddAllTours(select.Selection_Elitism(pop, elitism_size));  
+        	next_generation.AddAllTours(select.Selection_Elitism(pop, elitism_size));
         }
 
 
@@ -105,7 +120,6 @@ public class GA {
             crossover.clear();
 
         }
-        
 
 
         //Mutate each child in the next generation a bit

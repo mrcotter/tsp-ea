@@ -22,11 +22,11 @@ GENERAL USAGE NOTES
 
 	# Generations			Accept an integer number to specify how many generations to evolve (also the terminate condition), the recommended values are: 5000, 10000, 20000
 
-	# Repeat				Used to control how many repeats you want to run a single TSPLIB file, the values can vary from 1 to 10
+	# Repeat			Used to control how many repeats you want to run a single TSPLIB file, the values can vary from 1 to 10
 
 	# InverOver Rate		Accept a floating-point value for running inver-over algorithm, ranges from 0.0 to 1.0, usually small
 
-	# InverOver				Accept a boolean value (true or false) to specify whether the inver-over algorithm is going to use, this will disable other options below
+	# InverOver			Accept a boolean value (true or false) to specify whether the inver-over algorithm is going to use, this will disable other options below
 
 	# Mutation Rate			Accept a floating-point value to control the frequency mutation happens when evolving, from 0.0 to 1.0
 
@@ -70,5 +70,5 @@ Group Information
 Zhu Zheng		1633928
 Haijin Lin		1613340
 Tao Wang		1638414
-Yuankang Zhao	1640844
+Yuankang Zhao		1640844
 
